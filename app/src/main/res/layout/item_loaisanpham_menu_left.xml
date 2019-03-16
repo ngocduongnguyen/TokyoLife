@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:padding="@dimen/_10sdp"
+        android:id="@+id/tvTitleMenuTraiTrangChu"
+        android:textColor="@color/colorRed"
+        android:textSize="@dimen/_15sdp"
+        android:text="Xin chào"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

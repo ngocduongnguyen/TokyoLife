@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/itGioHang"
+        android:title="Gio hang"
+        android:icon="@drawable/baseline_shopping_cart_black_18dp"
+        app:actionLayout="@layout/custom_item_giohang"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        app:showAsAction="always"
+        android:title="more"
+        android:icon="@drawable/baseline_more_vert_black_18dp">
+
+        <menu>
+            <item android:id="@+id/itDangNhap"
+                android:icon="@drawable/baseline_sentiment_satisfied_alt_black_18dp"
+                android:title="Đăng nhập">
+            </item>
+
+            <item android:id="@+id/itThongBao"
+                android:title="Thông báo"
+                android:icon="@drawable/baseline_notifications_active_black_18dp">
+            </item>
+
+            <item android:id="@+id/itFavorite"
+                android:title="Danh sách mong muốn"
+                android:icon="@drawable/baseline_favorite_black_18dp">
+            </item>
+
+            <item android:id="@+id/itDonhangcuatoi"
+                android:title="Đơn hàng của tôi"
+                android:icon="@drawable/baseline_archive_black_18dp">
+            </item>
+
+            <item android:id="@+id/itCaiDat"
+                android:title="Cài Đặt"
+                android:icon="@drawable/baseline_settings_black_18dp">
+            </item>
+
+            <item android:id="@+id/itChinhsach"
+                android:title="Chính sách"
+                android:icon="@drawable/baseline_comment_black_18dp">
+            </item>
+
+            <item android:id="@+id/itTroGiup"
+                android:title="Trợ giúp"
+                android:icon="@drawable/baseline_help_black_18dp">
+            </item>
+
+            <item android:id="@+id/itLogout"
+                android:title="Đăng xuất"
+                android:visible="false"
+                android:icon="@drawable/baseline_delete_forever_black_18dp">
+            </item>
+
+        </menu>
+
+    </item>
+</menu>

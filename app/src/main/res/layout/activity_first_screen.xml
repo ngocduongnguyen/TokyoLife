@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tokyolife"
+    tools:context=".View.FirstScreen.FirstScreen">
+
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/_150sdp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_30sdp"
+            android:text="Đồ án tốt nghiệp" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:paddingTop="5dp"
+            android:text="App Mua Sắm Online" />
+
+        <LinearLayout
+            android:padding="@dimen/_20sdp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:paddingTop="5dp"
+                android:text="Giảng viên hướng dẫn:" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:textSize="20dp"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:text="Ths. Trần Thu Huệ" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:paddingTop="5dp"
+                android:text="Sinh viên:" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:paddingTop="5dp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:textColor="@android:color/holo_red_dark"
+                android:text="Nguyễn Ngọc Dương" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:paddingTop="5dp"
+                android:text="Lớp:" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:paddingTop="5dp"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:text="Ứng dụng phần mềm-Khóa 7-HHT" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
