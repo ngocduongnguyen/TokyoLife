@@ -2,4 +2,6 @@
     <string name="app_name">TokyoLife</string>
     <string name="open">Mở</string>
     <string name="close">Đóng</string>
+    <string name="facebook_app_id">427901707981347</string>
+    <string name="fb_login_protocol_scheme">fb427901707981347</string>
 </resources>

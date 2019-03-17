@@ -2,6 +2,7 @@ package com.duong.tokyolife.View.TrangChu;
 
 import android.content.ComponentCallbacks2;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -9,11 +10,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.LruCache;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,14 +24,28 @@ import com.duong.tokyolife.Adapter.MenuLoaiSanPhamAdapter;
 import com.duong.tokyolife.Adapter.ViewPagerTrangChuAdapter;
 import com.duong.tokyolife.Model.ObjectClass.LoaiSanPham;
 import com.duong.tokyolife.Model.TrangChu.DataJSONMenuLeft;
+import com.duong.tokyolife.Model.TrangChu.ModelDangNhap;
 import com.duong.tokyolife.Presenter.TrangChu.PresenterLogicMenuLeftTrangChu;
+import com.duong.tokyolife.Presenter.TrangChu.PresenterLogicOptionMenuFB;
 import com.duong.tokyolife.R;
 import com.duong.tokyolife.View.DangNhap_DangKy.DangNhap_DangKyActivity;
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements IViewTrangChu {
+public class MainActivity extends AppCompatActivity implements IViewTrangChu, GoogleApiClient.OnConnectionFailedListener {
     //menu trai
     Toolbar toolbar;
     TabLayout tabLayout;
@@ -44,11 +61,26 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu {
 
     PresenterLogicMenuLeftTrangChu presenterLogicMenuLeftTrangChu;
 
-    private LruCache mCache;
+    String tenNguoiDung=null;
+    PresenterLogicOptionMenuFB presenterLogicOptionMenuFB;
+    AccessToken accessTokenFacebook;
+
+    //Lưu lại menu để hiển thị
+    Menu menu;
+    MenuItem menuItemDangNhap,menuItemDangXuat;
+
+    ModelDangNhap modelDangNhap;
+    GoogleApiClient googleApiClient;
+    GoogleSignInResult googleSignInResult;
+
+    String cacheDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
         setContentView(R.layout.activity_main);
         addControls();
         addEvents();
@@ -87,6 +119,9 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu {
         menuLoaiSanPhamAdapter = new MenuLoaiSanPhamAdapter(this,R.layout.item_loaisanpham_menu_left,listMenuTrai);
         listView.setAdapter(menuLoaiSanPhamAdapter);
 
+        //Khai bao model de lay google thong tin tu google sign in result
+        modelDangNhap = new ModelDangNhap();
+        googleApiClient = modelDangNhap.layGoogleAPIClient(this,this);
     }
 
     private void addEvents() {
@@ -96,11 +131,58 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu {
                 Toast.makeText(MainActivity.this,"Bạn chọn: "+position,Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_phai_trangchu,menu);
+        this.menu=menu;
+
+        menuItemDangNhap=menu.findItem(R.id.itDangNhap);
+        menuItemDangXuat=menu.findItem(R.id.itLogout);
+        //Lay du lieu ng dung google
+        googleSignInResult = modelDangNhap.layThongTinDangNhapGG(googleApiClient);
+        //Lấy tên người dùng FB
+        presenterLogicOptionMenuFB = new PresenterLogicOptionMenuFB();
+        accessTokenFacebook=presenterLogicOptionMenuFB.layAccesTokenFacebook();
+        //lay cache database
+        cacheDatabase = modelDangNhap.layCacheDangNhapDatabase(this);
+
+        //facebook
+        if (accessTokenFacebook!=null){
+            GraphRequest graphRequest = GraphRequest.newMeRequest(accessTokenFacebook, new GraphRequest.GraphJSONObjectCallback() {
+                @Override
+                public void onCompleted(JSONObject object, GraphResponse response) {
+                    try {
+                        tenNguoiDung = object.getString("name");
+                        menuItemDangNhap.setTitle(tenNguoiDung);
+//                    Log.d("tenNgDungFB",tenNguoiDung);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            Bundle bundle = new Bundle();
+            bundle.putString("fields","name");
+            graphRequest.setParameters(bundle);
+            graphRequest.executeAsync();
+        }
+        //google
+        if (googleSignInResult!=null){
+            menuItemDangNhap.setTitle(googleSignInResult.getSignInAccount().getEmail());
+        }
+        //database
+        if (!cacheDatabase.equals("")){
+            menuItemDangNhap.setTitle(cacheDatabase);
+        }
+
+        // hien item dang xuat
+        if (accessTokenFacebook!=null || googleSignInResult!=null || !cacheDatabase.equals("")){
+            menuItemDangXuat.setVisible(true);
+        }
+
         return true;
     }
 
@@ -113,17 +195,40 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu {
 
         int idMenu = item.getItemId();
         switch (idMenu){
-
             case R.id.itDangNhap:
-                Intent iDangNhap = new Intent(MainActivity.this, DangNhap_DangKyActivity.class);
-                startActivity(iDangNhap);
-        }
+                if (accessTokenFacebook==null && googleSignInResult==null && cacheDatabase.equals("")){
+                    Intent iDangNhap = new Intent(MainActivity.this, DangNhap_DangKyActivity.class);
+                    startActivity(iDangNhap);
+                } break;
+            case R.id.itLogout:
+                if (accessTokenFacebook!=null){
+                    LoginManager.getInstance().logOut();
+                    this.menu.clear();
+                    this.onCreateOptionsMenu(menu);
+                }
+                if (googleSignInResult!=null){
+                    Auth.GoogleSignInApi.signOut(googleApiClient);
+                    this.menu.clear();
+                    this.onCreateOptionsMenu(menu);
+                }
 
+                if (!cacheDatabase.equals("")){
+                    modelDangNhap.updateCacheDangNhapDatabase(this,"");
+                    this.menu.clear();
+                    this.onCreateOptionsMenu(menu);
+                }
+                break;
+        }
         return true;
     }
 
     @Override
     public void hienThiDS_MenuLeft(List<LoaiSanPham> list) {
         listMenuTrai=list;
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }

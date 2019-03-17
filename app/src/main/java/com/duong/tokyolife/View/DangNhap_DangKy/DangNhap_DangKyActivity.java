@@ -10,7 +10,6 @@ import com.duong.tokyolife.Adapter.ViewPagerDangKyDangNhapAdapter;
 import com.duong.tokyolife.R;
 
 public class DangNhap_DangKyActivity extends AppCompatActivity {
-
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
