@@ -63,5 +63,4 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
         return dsSanPhamNoiBat.size();
     }
 
-
 }
