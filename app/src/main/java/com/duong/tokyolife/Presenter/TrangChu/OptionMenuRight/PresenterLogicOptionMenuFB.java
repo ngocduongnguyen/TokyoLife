@@ -1,4 +1,4 @@
-package com.duong.tokyolife.Presenter.TrangChu;
+package com.duong.tokyolife.Presenter.TrangChu.OptionMenuRight;
 
 import com.duong.tokyolife.Model.DangNhap_DangKy.DangNhapModel;
 import com.facebook.AccessToken;

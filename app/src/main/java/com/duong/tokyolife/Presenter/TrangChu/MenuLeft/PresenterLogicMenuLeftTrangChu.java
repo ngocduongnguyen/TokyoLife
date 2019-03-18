@@ -1,12 +1,7 @@
-package com.duong.tokyolife.Presenter.TrangChu;
+package com.duong.tokyolife.Presenter.TrangChu.MenuLeft;
 
-import android.widget.ListView;
-
-import com.duong.tokyolife.Model.ObjectClass.LoaiSanPham;
 import com.duong.tokyolife.Model.TrangChu.DataJSONMenuLeft;
 import com.duong.tokyolife.View.TrangChu.IViewTrangChu;
-
-import java.util.List;
 
 public class PresenterLogicMenuLeftTrangChu implements IPresenterMenuLeftTrangChu {
 

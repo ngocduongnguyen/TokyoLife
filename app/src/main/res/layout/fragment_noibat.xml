@@ -5,41 +5,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:src="@drawable/tokyolife"
-        android:background="@color/colorWhite"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp" >
-    </ImageView>
-
-    <TextView
-        android:text="Các thương hiệu lớn"
-        android:textColor="@android:color/holo_blue_dark"
-        android:padding="@dimen/_5sdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </TextView>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerNoiBatThuongHieu"
-        android:layout_margin="@dimen/_5sdp"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
 
-    <TextView
-        android:text="Sản phẩm mới"
-        android:textColor="@android:color/holo_blue_dark"
-        android:padding="@dimen/_5sdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </TextView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_noibat_tong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerNoiBatSanPham"
-        android:layout_margin="@dimen/_5sdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>
