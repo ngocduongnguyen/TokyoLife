@@ -1,6 +1,5 @@
 package com.duong.tokyolife.View.TrangChu;
 
-import android.content.ComponentCallbacks2;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -10,21 +9,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.util.LruCache;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.duong.tokyolife.Adapter.MenuLoaiSanPhamAdapter;
 import com.duong.tokyolife.Adapter.ViewPagerTrangChuAdapter;
 import com.duong.tokyolife.Model.ObjectClass.LoaiSanPham;
-import com.duong.tokyolife.Model.TrangChu.DataJSONMenuLeft;
-import com.duong.tokyolife.Model.TrangChu.ModelDangNhap;
+import com.duong.tokyolife.Model.DangNhap_DangKy.DangNhapModel;
 import com.duong.tokyolife.Presenter.TrangChu.PresenterLogicMenuLeftTrangChu;
 import com.duong.tokyolife.Presenter.TrangChu.PresenterLogicOptionMenuFB;
 import com.duong.tokyolife.R;
@@ -69,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
     Menu menu;
     MenuItem menuItemDangNhap,menuItemDangXuat;
 
-    ModelDangNhap modelDangNhap;
+    DangNhapModel dangNhapModel;
     GoogleApiClient googleApiClient;
     GoogleSignInResult googleSignInResult;
 
@@ -120,8 +115,8 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         listView.setAdapter(menuLoaiSanPhamAdapter);
 
         //Khai bao model de lay google thong tin tu google sign in result
-        modelDangNhap = new ModelDangNhap();
-        googleApiClient = modelDangNhap.layGoogleAPIClient(this,this);
+        dangNhapModel = new DangNhapModel();
+        googleApiClient = dangNhapModel.layGoogleAPIClient(this,this);
     }
 
     private void addEvents() {
@@ -143,12 +138,12 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         menuItemDangNhap=menu.findItem(R.id.itDangNhap);
         menuItemDangXuat=menu.findItem(R.id.itLogout);
         //Lay du lieu ng dung google
-        googleSignInResult = modelDangNhap.layThongTinDangNhapGG(googleApiClient);
+        googleSignInResult = dangNhapModel.layThongTinDangNhapGG(googleApiClient);
         //Lấy tên người dùng FB
         presenterLogicOptionMenuFB = new PresenterLogicOptionMenuFB();
         accessTokenFacebook=presenterLogicOptionMenuFB.layAccesTokenFacebook();
         //lay cache database
-        cacheDatabase = modelDangNhap.layCacheDangNhapDatabase(this);
+        cacheDatabase = dangNhapModel.layCacheDangNhapDatabase(this);
 
         //facebook
         if (accessTokenFacebook!=null){
@@ -213,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
                 }
 
                 if (!cacheDatabase.equals("")){
-                    modelDangNhap.updateCacheDangNhapDatabase(this,"");
+                    dangNhapModel.updateCacheDangNhapDatabase(this,"");
                     this.menu.clear();
                     this.onCreateOptionsMenu(menu);
                 }

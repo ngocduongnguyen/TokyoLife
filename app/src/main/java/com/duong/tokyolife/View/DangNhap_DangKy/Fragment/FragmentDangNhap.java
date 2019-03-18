@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.duong.tokyolife.Model.TrangChu.ModelDangNhap;
+import com.duong.tokyolife.Model.DangNhap_DangKy.DangNhapModel;
 import com.duong.tokyolife.R;
 import com.duong.tokyolife.View.TrangChu.MainActivity;
 import com.facebook.CallbackManager;
@@ -24,12 +23,10 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class FragmentDangNhap extends Fragment implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
@@ -43,7 +40,7 @@ public class FragmentDangNhap extends Fragment implements View.OnClickListener, 
     GoogleApiClient googleApiClient;
     public static int SIGN_IN_GOOGLE_PLUS = 1998;
     //database
-    ModelDangNhap modelDangNhap;
+    DangNhapModel dangNhapModel;
 
     @Nullable
     @Override
@@ -56,8 +53,8 @@ public class FragmentDangNhap extends Fragment implements View.OnClickListener, 
 
     private void addControls() {
         //Google
-        ModelDangNhap modelDangNhap = new ModelDangNhap();
-        googleApiClient=modelDangNhap.layGoogleAPIClient(getContext(),this);
+        DangNhapModel dangNhapModel = new DangNhapModel();
+        googleApiClient= dangNhapModel.layGoogleAPIClient(getContext(),this);
         //Facebook
         FacebookSdk.sdkInitialize(getContext().getApplicationContext());
         callbackManager=CallbackManager.Factory.create();
@@ -107,8 +104,8 @@ public class FragmentDangNhap extends Fragment implements View.OnClickListener, 
                 startActivityForResult(iGooglePlus,SIGN_IN_GOOGLE_PLUS);
                 break;
             case R.id.btnDangNhap:
-                modelDangNhap = new ModelDangNhap();
-                boolean kt = modelDangNhap.kiemTraDangNhap(getActivity(),edUsername.getText().toString().trim(),edPassword.getText().toString().trim());
+                dangNhapModel = new DangNhapModel();
+                boolean kt = dangNhapModel.kiemTraDangNhap(getActivity(),edUsername.getText().toString().trim(),edPassword.getText().toString().trim());
 
                 if (kt){
                     Intent iTrangChu = new Intent(getActivity(),MainActivity.class);
