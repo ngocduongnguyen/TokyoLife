@@ -13,6 +13,8 @@ import com.duong.tokyolife.Model.ObjectClass.SanPham;
 import com.duong.tokyolife.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdapter.SanPhamViewHolder> {
@@ -54,8 +56,12 @@ public class SanPhamNoiBatAdapter extends RecyclerView.Adapter<SanPhamNoiBatAdap
         SanPham sanPham = dsSanPhamNoiBat.get(i);
 
         sanPhamViewHolder.txtTen.setText(sanPham.getTensp());
-        sanPhamViewHolder.txtGia.setText(String.valueOf(sanPham.getGia()));
-        Picasso.with(context).load(sanPham.getAnhlon()).into(sanPhamViewHolder.imageView);
+        Picasso.with(context).load(sanPham.getAnhlon()).resizeDimen(R.dimen._140sdp,R.dimen._140sdp).into(sanPhamViewHolder.imageView);
+        //Định dạng tiền tệ
+        NumberFormat numberFormat = new DecimalFormat("###,###");
+        String giaSP = numberFormat.format(sanPham.getGia());
+        sanPhamViewHolder.txtGia.setText(giaSP+" VNĐ");
+
     }
 
     @Override

@@ -22,6 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:textAllCaps="false"
                 android:background="@color/colorWhite">
 
                 <LinearLayout
@@ -32,7 +33,8 @@
                         android:id="@+id/toolbarTrangChu"
                         android:layout_width="match_parent"
                         android:background="@color/colorWhite"
-                         app:logo="@drawable/logo"
+                        app:logo="@drawable/logo"
+                        android:textAllCaps="false"
                         android:layout_height="?attr/actionBarSize">
                     </android.support.v7.widget.Toolbar>
 
@@ -81,6 +83,7 @@
                     <!--tabMode: chạy-->
                     <android.support.design.widget.TabLayout
                         android:id="@+id/tabsTrangChu"
+                        android:textAllCaps="false"
                         app:tabMode="scrollable"
                         app:tabTextColor="@color/colorPrimaryDark"
                         android:layout_width="match_parent"

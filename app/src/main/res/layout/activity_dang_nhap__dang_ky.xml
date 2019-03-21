@@ -8,10 +8,12 @@
 
     <android.support.design.widget.AppBarLayout
         android:background="@color/colorWhite"
+        android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
+            android:textAllCaps="false"
             android:id="@+id/toolbarDN_DK"
             android:background="@color/colorPrimaryDark"
             android:layout_width="match_parent"
@@ -24,6 +26,7 @@
             android:id="@+id/tabsDN_DK"
             app:tabTextColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
+            android:textAllCaps="false"
             android:layout_height="wrap_content">
         </android.support.design.widget.TabLayout>
 

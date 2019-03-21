@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.squareup.picasso.Picasso;
 
 import com.duong.tokyolife.Model.ObjectClass.ThuongHieu;
@@ -16,7 +19,7 @@ import com.duong.tokyolife.R;
 import java.time.Instant;
 import java.util.List;
 
-public class ThuongHieuNoiBatAdapter extends RecyclerView.Adapter<ThuongHieuNoiBatAdapter.ThuongHieuHolder> {
+public class ThuongHieuNoiBatAdapter extends RecyclerView.Adapter<ThuongHieuNoiBatAdapter.ThuongHieuHolder>{
     Context context;
     List<ThuongHieu> listThuongHieu;
 
@@ -25,14 +28,18 @@ public class ThuongHieuNoiBatAdapter extends RecyclerView.Adapter<ThuongHieuNoiB
         this.listThuongHieu=listThuongHieu;
     }
 
+
+
     public class ThuongHieuHolder extends RecyclerView.ViewHolder {
         TextView txtTieuDe;
         ImageView imgThuongHieu;
+        LinearLayout linearLayout;
 
         public ThuongHieuHolder(@NonNull View itemView) {
             super(itemView);
             txtTieuDe=itemView.findViewById(R.id.title_noibat);
             imgThuongHieu=itemView.findViewById(R.id.img_item_noibat);
+            linearLayout=itemView.findViewById(R.id.linearItemThuongHieu);
         }
     }
 
@@ -50,9 +57,15 @@ public class ThuongHieuNoiBatAdapter extends RecyclerView.Adapter<ThuongHieuNoiB
 
     @Override
     public void onBindViewHolder(@NonNull ThuongHieuHolder thuongHieuHolder, int i) {
-        ThuongHieu thuongHieu = listThuongHieu.get(i);
+            final ThuongHieu thuongHieu = listThuongHieu.get(i);
             thuongHieuHolder.txtTieuDe.setText(thuongHieu.getTenth());
-            Picasso.with(context).load(thuongHieu.getHinhth()).into(thuongHieuHolder.imgThuongHieu);
+            Picasso.with(context).load(thuongHieu.getHinhth()).resizeDimen(R.dimen._100sdp,R.dimen._100sdp).into(thuongHieuHolder.imgThuongHieu);
+            thuongHieuHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context,"click: "+thuongHieu.getMath()+" ---Ten: "+thuongHieu.getTenth(),Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 
     @Override

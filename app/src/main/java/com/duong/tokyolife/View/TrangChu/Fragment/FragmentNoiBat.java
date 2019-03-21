@@ -20,6 +20,7 @@ import com.duong.tokyolife.Presenter.TrangChu.NoiBat.PresenterLogicNoiBat;
 import com.duong.tokyolife.R;
 import com.duong.tokyolife.View.TrangChu.IViewNoiBat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentNoiBat extends Fragment implements IViewNoiBat {
