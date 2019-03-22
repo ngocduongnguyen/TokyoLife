@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarSPbyTH"
+            android:id="@+id/toolbarSPbyLoaiSP"
             app:titleTextColor="@color/colorPrimaryDark"
             app:layout_scrollFlags="scroll|enterAlways"
             android:background="@color/colorWhite"
@@ -61,7 +61,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerDsSpByThuongHieu"
+        android:id="@+id/recyclerDsSpByLoaiSP"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

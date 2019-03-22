@@ -1,4 +1,10 @@
 package com.duong.tokyolife.View.HienThiSPTheoThuongHieu;
 
-public class IViewHienThiSPTheoThuongHieu {
+import com.duong.tokyolife.Model.ObjectClass.SanPham;
+
+import java.util.List;
+
+public interface IViewHienThiSPTheoThuongHieu {
+    void hienThiDSSanPham(List<SanPham> sanPhamList);
+    void loiHienThiDSSanPham();
 }

@@ -3,6 +3,7 @@ package com.duong.tokyolife.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +58,8 @@ public class NoiBatAdapter extends RecyclerView.Adapter<NoiBatAdapter.ViewHolder
         List<SanPham> dsSanPham = noiBat.getListLoaiSpNoiBat();
         SanPhamNoiBatAdapter sanPhamNoiBatAdapter = new SanPhamNoiBatAdapter(context,dsSanPham);
 
-        RecyclerView.LayoutManager layoutManagerSP = new GridLayoutManager(context,2,GridLayoutManager.HORIZONTAL,false);
+        //RecyclerView.LayoutManager layoutManagerSP = new GridLayoutManager(context,2,GridLayoutManager.HORIZONTAL,false);
+        RecyclerView.LayoutManager layoutManagerSP =new LinearLayoutManager(context);
         viewHolder.recyclerSanPham.setAdapter(sanPhamNoiBatAdapter);
         viewHolder.recyclerSanPham.setLayoutManager(layoutManagerSP);
         sanPhamNoiBatAdapter.notifyDataSetChanged();

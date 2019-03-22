@@ -24,6 +24,7 @@ import com.duong.tokyolife.Presenter.TrangChu.MenuLeft.PresenterLogicMenuLeftTra
 import com.duong.tokyolife.Presenter.TrangChu.OptionMenuRight.PresenterLogicOptionMenuFB;
 import com.duong.tokyolife.R;
 import com.duong.tokyolife.View.DangNhap_DangKy.DangNhap_DangKyActivity;
+import com.duong.tokyolife.View.HienThiSPTheoLoaiSP.HienThiSPTheoLoaiSPActivity;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
@@ -123,11 +124,12 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this,"Bạn chọn: "+position,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this,"Bạn chọn loại sp có mã: "+listMenuTrai.get(position).getTenLoaiSP(),Toast.LENGTH_SHORT).show();
+                Intent iSanPham = new Intent(MainActivity.this, HienThiSPTheoLoaiSPActivity.class);
+                iSanPham.putExtra("maloaisp",listMenuTrai.get(position).getMaLoaiSP());
+                startActivity(iSanPham);
             }
         });
-
-
     }
 
     @Override

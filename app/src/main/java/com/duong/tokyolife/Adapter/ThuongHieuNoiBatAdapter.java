@@ -1,6 +1,7 @@
 package com.duong.tokyolife.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.duong.tokyolife.View.HienThiSPTheoThuongHieu.HienThiSPTheoThuongHieuActivity;
 import com.squareup.picasso.Picasso;
 
 import com.duong.tokyolife.Model.ObjectClass.ThuongHieu;
@@ -63,7 +65,10 @@ public class ThuongHieuNoiBatAdapter extends RecyclerView.Adapter<ThuongHieuNoiB
             thuongHieuHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context,"click: "+thuongHieu.getMath()+" ---Ten: "+thuongHieu.getTenth(),Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context,"click: "+thuongHieu.getMath()+" ---Ten: "+thuongHieu.getTenth(),Toast.LENGTH_SHORT).show();
+                    Intent iHienThiSpTheoDanhMuc = new Intent(context, HienThiSPTheoThuongHieuActivity.class);
+                    iHienThiSpTheoDanhMuc.putExtra("dsspofth",thuongHieu.getMath());
+                    context.startActivity(iHienThiSpTheoDanhMuc);
                 }
             });
     }

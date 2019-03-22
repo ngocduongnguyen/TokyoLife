@@ -1,4 +1,5 @@
 package com.duong.tokyolife.Presenter.HienThiSPTheoThuongHieu;
 
-public class IPresenterHienThiSPTheoThuongHieu {
+public interface IPresenterHienThiSPTheoThuongHieu {
+    void layDSspTheoThuogHieu(int math);
 }

@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.HienThiSPTheoThuongHieu.HienThiSPTheoThuongHieuActivity"></activity>
+        <activity android:name=".View.HienThiSPTheoLoaiSP.HienThiSPTheoLoaiSPActivity"></activity>
+        <activity android:name=".View.HienThiSPTheoThuongHieu.HienThiSPTheoThuongHieuActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -33,7 +34,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.DangNhap_DangKy.DangNhap_DangKyActivity"></activity>
+        <activity android:name=".View.DangNhap_DangKy.DangNhap_DangKyActivity" />
         <activity android:name=".View.FirstScreen.FirstScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.TrangChu.MainActivity"></activity>
+        <activity android:name=".View.TrangChu.MainActivity" />
     </application>
 
 </manifest>
