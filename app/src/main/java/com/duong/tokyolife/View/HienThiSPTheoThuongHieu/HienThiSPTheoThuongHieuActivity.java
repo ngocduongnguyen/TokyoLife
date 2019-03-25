@@ -12,6 +12,8 @@ import com.duong.tokyolife.Adapter.DsSPTheoThuongHieuAdapter;
 import com.duong.tokyolife.Model.ObjectClass.SanPham;
 import com.duong.tokyolife.Presenter.HienThiSPTheoThuongHieu.PresenterLogicHienThiSPTheoThuongHieu;
 import com.duong.tokyolife.R;
+import com.duong.tokyolife.Utils.LoadMore;
+
 import java.util.List;
 
 public class HienThiSPTheoThuongHieuActivity extends AppCompatActivity implements IViewHienThiSPTheoThuongHieu{
@@ -40,6 +42,7 @@ public class HienThiSPTheoThuongHieuActivity extends AppCompatActivity implement
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HienThiSPTheoThuongHieuActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(dsSPTheoThuongHieuAdapter);
+        recyclerView.addOnScrollListener(new LoadMore(layoutManager));
         dsSPTheoThuongHieuAdapter.notifyDataSetChanged();
     }
 
