@@ -42,7 +42,7 @@ public class HienThiSPTheoThuongHieuActivity extends AppCompatActivity implement
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HienThiSPTheoThuongHieuActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(dsSPTheoThuongHieuAdapter);
-        recyclerView.addOnScrollListener(new LoadMore(layoutManager));
+//        recyclerView.addOnScrollListener(new LoadMore(layoutManager));
         dsSPTheoThuongHieuAdapter.notifyDataSetChanged();
     }
 

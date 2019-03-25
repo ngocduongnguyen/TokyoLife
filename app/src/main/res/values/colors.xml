@@ -9,4 +9,7 @@
     <color name="colorOrange">#f67122</color>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#cb2128</color>
+    <color name="colorWhiteMoke">#F5F5F5</color>
+    <color name="colorDotSliderInActive">#FF6F6F</color>
+    <color name="colorDotSliderInNonActive">#FFBDBD</color>
 </resources>

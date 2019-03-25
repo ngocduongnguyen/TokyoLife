@@ -1,8 +1,11 @@
 package com.duong.tokyolife.Model.ObjectClass;
 
+import java.util.List;
+
 public class SanPham {
     private int masp,gia,soluong,maloaisp,math,luotmua;
     private String tensp,anhlon,anhnho,thongtin;
+    private List<ChiTietSanPham> dsChiTietSP;
 
     public int getMasp() {
         return masp;
@@ -82,5 +85,13 @@ public class SanPham {
 
     public void setTensp(String tensp) {
         this.tensp = tensp;
+    }
+
+    public List<ChiTietSanPham> getDsChiTietSP() {
+        return dsChiTietSP;
+    }
+
+    public void setDsChiTietSP(List<ChiTietSanPham> dsChiTietSP) {
+        this.dsChiTietSP = dsChiTietSP;
     }
 }
