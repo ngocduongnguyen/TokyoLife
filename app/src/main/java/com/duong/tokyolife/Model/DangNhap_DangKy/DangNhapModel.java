@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
+import com.duong.tokyolife.Utils.Data;
 import com.duong.tokyolife.Utils.DownloadJSON;
 import com.duong.tokyolife.Utils.ServerName;
 import com.facebook.AccessToken;
@@ -98,6 +99,11 @@ public class DangNhapModel {
 
                 String tennv = jsonObject.getString("tennv");
                 updateCacheDangNhapDatabase(context,tennv);
+
+                String manv = jsonObject.getString("manv");
+                // lấy mã nhân viên, tên nhân viên
+                Data.code=manv;
+                Data.name=tennv;
 
                 kiemTra=true;
             } else {

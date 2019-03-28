@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.duong.tokyolife.Adapter.MenuLoaiSanPhamAdapter;
 import com.duong.tokyolife.Adapter.ViewPagerTrangChuAdapter;
@@ -23,6 +22,7 @@ import com.duong.tokyolife.Model.DangNhap_DangKy.DangNhapModel;
 import com.duong.tokyolife.Presenter.TrangChu.MenuLeft.PresenterLogicMenuLeftTrangChu;
 import com.duong.tokyolife.Presenter.TrangChu.OptionMenuRight.PresenterLogicOptionMenuFB;
 import com.duong.tokyolife.R;
+import com.duong.tokyolife.Utils.Data;
 import com.duong.tokyolife.View.DangNhap_DangKy.DangNhap_DangKyActivity;
 import com.duong.tokyolife.View.HienThiSPTheoLoaiSP.HienThiSPTheoLoaiSPActivity;
 import com.facebook.AccessToken;
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         listMenuTrai = new ArrayList<>();
         presenterLogicMenuLeftTrangChu = new PresenterLogicMenuLeftTrangChu(this);
         presenterLogicMenuLeftTrangChu.layDanhSachLoaiSP();
-        menuLoaiSanPhamAdapter = new MenuLoaiSanPhamAdapter(this,R.layout.item_loaisanpham_menu_left,listMenuTrai);
+        menuLoaiSanPhamAdapter = new MenuLoaiSanPhamAdapter(this,R.layout.custom_item_loaisanpham_menu_left,listMenuTrai);
         listView.setAdapter(menuLoaiSanPhamAdapter);
 
         //Khai bao model de lay google thong tin tu google sign in result
@@ -154,6 +154,8 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
                 public void onCompleted(JSONObject object, GraphResponse response) {
                     try {
                         tenNguoiDung = object.getString("name");
+                        Data.code=accessTokenFacebook.getUserId();
+                        Data.name=tenNguoiDung;
                         menuItemDangNhap.setTitle(tenNguoiDung);
 //                    Log.d("tenNgDungFB",tenNguoiDung);
                     } catch (JSONException e) {
@@ -168,7 +170,9 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         }
         //google
         if (googleSignInResult!=null){
-            menuItemDangNhap.setTitle(googleSignInResult.getSignInAccount().getEmail());
+            Data.code=googleSignInResult.getSignInAccount().getId();
+            Data.name=googleSignInResult.getSignInAccount().getDisplayName();
+            menuItemDangNhap.setTitle(googleSignInResult.getSignInAccount().getDisplayName());
         }
         //database
         if (!cacheDatabase.equals("")){
@@ -214,6 +218,8 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
                     this.menu.clear();
                     this.onCreateOptionsMenu(menu);
                 }
+                Data.code="";
+                Data.name="";
                 break;
         }
         return true;

@@ -1,15 +1,8 @@
 package com.duong.tokyolife.View.DanhGia;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +12,9 @@ import android.widget.Toast;
 import com.duong.tokyolife.Model.ObjectClass.DanhGia;
 import com.duong.tokyolife.Presenter.DanhGia.PresenterLogicDanhGia;
 import com.duong.tokyolife.R;
+import com.duong.tokyolife.Utils.Data;
 
-public class DanhGiaActivity extends AppCompatActivity implements IViewDanhGia {
+public class ThemDanhGiaActivity extends AppCompatActivity implements IViewThemDanhGiaDanhGia {
 
     TextInputLayout ip_tieude, ip_noidung;
     EditText edTieude, edNoidung;
@@ -61,12 +55,15 @@ public class DanhGiaActivity extends AppCompatActivity implements IViewDanhGia {
         btnDongY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenterLogicDanhGia = new PresenterLogicDanhGia(DanhGiaActivity.this);
+                presenterLogicDanhGia = new PresenterLogicDanhGia(ThemDanhGiaActivity.this);
                 DanhGia danhGia = new DanhGia();
 
-                TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-                String madg = telephonyManager.getDeviceId();
-                String tenthietbi = Build.MODEL;
+//                TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+//                String madg = telephonyManager.getDeviceId();
+//                String madg = Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
+//                String tenthietbi = Build.MODEL;
+                String madg = Data.code;
+                String tenthietbi = Data.name;
                 String tieude = edTieude.getText().toString().trim();
                 String noidung = edNoidung.getText().toString().trim();
 
@@ -94,6 +91,7 @@ public class DanhGiaActivity extends AppCompatActivity implements IViewDanhGia {
                 danhGia.setSosao(sosao);
                 if (!ip_tieude.isErrorEnabled()&&!ip_noidung.isErrorEnabled()){
                     presenterLogicDanhGia.themDanhGia(danhGia);
+                    finish();
                 }
             }
         });
@@ -106,6 +104,6 @@ public class DanhGiaActivity extends AppCompatActivity implements IViewDanhGia {
 
     @Override
     public void themThatBai() {
-        Toast.makeText(this,"Bạn không thể thêm đánh giá sản phẩm này!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Bạn chưa đăng nhập hoặc bạn đã đánh giá sản phẩm này trước đây!",Toast.LENGTH_SHORT).show();
     }
 }

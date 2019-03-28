@@ -26,7 +26,7 @@ public class MenuLoaiSanPhamAdapter extends ArrayAdapter<LoaiSanPham> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater = context.getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.item_loaisanpham_menu_left,parent,false);
+        View view = layoutInflater.inflate(R.layout.custom_item_loaisanpham_menu_left,parent,false);
 
         TextView textView = view.findViewById(R.id.tvTitleMenuTraiTrangChu);
         textView.setText(objects.get(position).getTenLoaiSP());

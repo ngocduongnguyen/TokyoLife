@@ -1,30 +1,33 @@
 package com.duong.tokyolife.View.ChiTietSanPham;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.duong.tokyolife.Adapter.DsDanhGiaSanPhamAdapter;
 import com.duong.tokyolife.Adapter.ViewPagerSliderAdapter;
-import com.duong.tokyolife.Model.ChiTietSanPham.ChiTietSanPhamModel;
 import com.duong.tokyolife.Model.ObjectClass.ChiTietSanPham;
+import com.duong.tokyolife.Model.ObjectClass.DanhGia;
 import com.duong.tokyolife.Model.ObjectClass.SanPham;
 import com.duong.tokyolife.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
+import com.duong.tokyolife.Presenter.DanhGia.PresenterLogicDanhGia;
 import com.duong.tokyolife.R;
 import com.duong.tokyolife.Utils.ServerName;
-import com.duong.tokyolife.View.DanhGia.DanhGiaActivity;
+import com.duong.tokyolife.View.DanhGia.DanhSachDanhGiaActivity;
+import com.duong.tokyolife.View.DanhGia.ThemDanhGiaActivity;
 
 import java.text.DecimalFormat;
 import java.text.Format;
@@ -39,7 +42,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     List<Fragment> dsFragment;
     TextView[] txtDots;
     LinearLayout layoutDotsChiTiet,layoutThongSoKT;
-    TextView txtTenSanPham,txtGiaTien,txtThongtinChiTiet,txtVietDanhGia;
+    TextView txtTenSanPham,txtGiaTien,txtThongtinChiTiet,txtVietDanhGia,txtXemtatcadanhgia;
+    RecyclerView recyclerView;
+    RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,26 +55,37 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         layoutDotsChiTiet = findViewById(R.id.layout_dots_chitiet);
         txtTenSanPham = findViewById(R.id.txt_tenSanPham);
         txtGiaTien = findViewById(R.id.txt_giaSanPham);
+        ratingBar=findViewById(R.id.rbDanhGia);
         toolbar = findViewById(R.id.toolbar);
         txtThongtinChiTiet = findViewById(R.id.txtThongtinChiTiet);
         layoutThongSoKT = findViewById(R.id.linearThongSoKT);
+        recyclerView = findViewById(R.id.recycler_danhgia);
+        txtXemtatcadanhgia = findViewById(R.id.txt_xemtatcadanhgia);
 
         txtVietDanhGia=findViewById(R.id.txt_vietDanhGia);
-//        toolbar.setTitleTextColor(getIDColor(R.color.colorWhite));
-//        toolbar.setTitle("Chi Tiết Sản Phẩm");
-//        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         final int masp = intent.getIntExtra("masp",0);
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         presenterLogicChiTietSanPham.layChiTietSanPham(masp);
+        presenterLogicChiTietSanPham.laydsDanhGiaTheoSP(masp,0);
+        presenterLogicChiTietSanPham.layTBDanhGiaSP(masp);
 
         txtVietDanhGia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iDanhGia = new Intent(ChiTietSanPhamActivity.this, DanhGiaActivity.class);
+                Intent iDanhGia = new Intent(ChiTietSanPhamActivity.this, ThemDanhGiaActivity.class);
                 iDanhGia.putExtra("masp",masp);
                 startActivity(iDanhGia);
+            }
+        });
+
+        txtXemtatcadanhgia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iDsDanhGia = new Intent(ChiTietSanPhamActivity.this, DanhSachDanhGiaActivity.class);
+                iDsDanhGia.putExtra("masp",masp);
+                startActivity(iDsDanhGia);
             }
         });
     }
@@ -123,7 +139,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-
             }
 
             @Override
@@ -137,7 +152,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
             }
         });
     }
-
     private void themDotSlider(int viTriHienTai){
         txtDots = new TextView[dsFragment.size()];
         layoutDotsChiTiet.removeAllViews();
@@ -160,4 +174,20 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         }
         return color;
     }
+
+
+    @Override
+    public void hienThiDanhGia(List<DanhGia> ds) {
+        DsDanhGiaSanPhamAdapter dsDanhGiaSanPhamAdapter = new DsDanhGiaSanPhamAdapter(ChiTietSanPhamActivity.this,ds,2);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ChiTietSanPhamActivity.this,LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(dsDanhGiaSanPhamAdapter);
+        dsDanhGiaSanPhamAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void layTBSoSao(float count) {
+        ratingBar.setRating(count);
+    }
+
 }

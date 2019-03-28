@@ -4,6 +4,7 @@ import com.duong.tokyolife.Model.ObjectClass.DanhGia;
 import com.duong.tokyolife.Utils.DownloadJSON;
 import com.duong.tokyolife.Utils.ServerName;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

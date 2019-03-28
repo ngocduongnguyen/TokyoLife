@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/_20sdp"
-    tools:context=".View.DanhGia.DanhGiaActivity">
+    tools:context=".View.DanhGia.ThemDanhGiaActivity">
 
     <TextView
         android:text="Viết đánh giá về sản phẩm này!"

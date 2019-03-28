@@ -2,22 +2,27 @@ package com.duong.tokyolife.Presenter.DanhGia;
 
 import com.duong.tokyolife.Model.DanhGia.DanhGiaModel;
 import com.duong.tokyolife.Model.ObjectClass.DanhGia;
-import com.duong.tokyolife.View.DanhGia.IViewDanhGia;
+import com.duong.tokyolife.Utils.Data;
+import com.duong.tokyolife.View.DanhGia.IViewThemDanhGiaDanhGia;
 
 public class PresenterLogicDanhGia implements IPresenterDanhGia {
-    IViewDanhGia iViewDanhGia;
+    IViewThemDanhGiaDanhGia iViewThemDanhGiaDanhGia;
     DanhGiaModel danhGiaModel;
-    public PresenterLogicDanhGia(IViewDanhGia iViewDanhGia){
-        this.iViewDanhGia=iViewDanhGia;
+    public PresenterLogicDanhGia(IViewThemDanhGiaDanhGia iViewThemDanhGiaDanhGia){
+        this.iViewThemDanhGiaDanhGia = iViewThemDanhGiaDanhGia;
         danhGiaModel = new DanhGiaModel();
     }
     @Override
     public void themDanhGia(DanhGia danhGia) {
-        boolean kiemtra = danhGiaModel.themDanhGia(danhGia);
-        if (kiemtra){
-            iViewDanhGia.themThanhCong();
+        if (!Data.code.equals("")){
+            boolean kiemtra = danhGiaModel.themDanhGia(danhGia);
+            if (kiemtra){
+                iViewThemDanhGiaDanhGia.themThanhCong();
+            } else {
+                iViewThemDanhGiaDanhGia.themThatBai();
+            }
         } else {
-            iViewDanhGia.themThatBai();
+            iViewThemDanhGiaDanhGia.themThatBai();
         }
     }
 }
