@@ -1,6 +1,8 @@
 package com.duong.tokyolife.View.ChiTietSanPham;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -13,9 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.duong.tokyolife.Adapter.DsDanhGiaSanPhamAdapter;
 import com.duong.tokyolife.Adapter.ViewPagerSliderAdapter;
@@ -29,6 +33,7 @@ import com.duong.tokyolife.Utils.ServerName;
 import com.duong.tokyolife.View.DanhGia.DanhSachDanhGiaActivity;
 import com.duong.tokyolife.View.DanhGia.ThemDanhGiaActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.ArrayList;
@@ -45,6 +50,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     TextView txtTenSanPham,txtGiaTien,txtThongtinChiTiet,txtVietDanhGia,txtXemtatcadanhgia;
     RecyclerView recyclerView;
     RatingBar ratingBar;
+    ImageView imgThemGioHang;
+
+    SanPham sanPhamGioHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +69,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         layoutThongSoKT = findViewById(R.id.linearThongSoKT);
         recyclerView = findViewById(R.id.recycler_danhgia);
         txtXemtatcadanhgia = findViewById(R.id.txt_xemtatcadanhgia);
+        imgThemGioHang = findViewById(R.id.imgThemGioHang);
 
         txtVietDanhGia=findViewById(R.id.txt_vietDanhGia);
 
@@ -88,10 +97,30 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
                 startActivity(iDsDanhGia);
             }
         });
+
+        imgThemGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = dsFragment.get(0);
+                View view = fragment.getView();
+                ImageView imageView = view.findViewById(R.id.img_slider_chitiet);
+                Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+                byte[] hinhsanphamgiohang = byteArrayOutputStream.toByteArray();
+
+                sanPhamGioHang.setHinhGioHang(hinhsanphamgiohang);
+                presenterLogicChiTietSanPham.themGioHang(sanPhamGioHang,ChiTietSanPhamActivity.this);
+            }
+        });
     }
 
     @Override
     public void hienThiChiTietSanPham(SanPham sanPham) {
+
+        sanPhamGioHang = sanPham;
+
         txtTenSanPham.setText(sanPham.getTensp());
         Format format = new DecimalFormat("###,###");
         String gia = ((DecimalFormat) format).format(sanPham.getGia());
@@ -188,6 +217,16 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     @Override
     public void layTBSoSao(float count) {
         ratingBar.setRating(count);
+    }
+
+    @Override
+    public void themGioHangThanhCong() {
+        Toast.makeText(ChiTietSanPhamActivity.this,"Thêm vào giở hàng thành công!",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void themGioHangThatBai() {
+        Toast.makeText(ChiTietSanPhamActivity.this,"Sản phẩm đã có trong giỏ hàng!",Toast.LENGTH_SHORT).show();
     }
 
 }

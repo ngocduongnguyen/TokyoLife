@@ -6,6 +6,15 @@ public class SanPham {
     private int masp,gia,soluong,maloaisp,math,luotmua;
     private String tensp,anhlon,anhnho,thongtin;
     private List<ChiTietSanPham> dsChiTietSP;
+    private byte[] hinhGioHang;
+
+    public byte[] getHinhGioHang() {
+        return hinhGioHang;
+    }
+
+    public void setHinhGioHang(byte[] hinhGioHang) {
+        this.hinhGioHang = hinhGioHang;
+    }
 
     public int getMasp() {
         return masp;

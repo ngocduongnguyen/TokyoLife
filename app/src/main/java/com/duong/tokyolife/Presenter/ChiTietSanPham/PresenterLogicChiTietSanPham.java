@@ -1,6 +1,9 @@
 package com.duong.tokyolife.Presenter.ChiTietSanPham;
 
+import android.content.Context;
+
 import com.duong.tokyolife.Model.ChiTietSanPham.ChiTietSanPhamModel;
+import com.duong.tokyolife.Model.GioHang.GioHangModel;
 import com.duong.tokyolife.Model.ObjectClass.DanhGia;
 import com.duong.tokyolife.Model.ObjectClass.SanPham;
 import com.duong.tokyolife.View.ChiTietSanPham.IViewChiTietSanPham;
@@ -12,10 +15,12 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham{
 
     IViewChiTietSanPham iViewChiTietSanPham;
     ChiTietSanPhamModel chiTietSanPhamModel;
+    GioHangModel gioHangModel;
 
     public PresenterLogicChiTietSanPham(IViewChiTietSanPham iViewChiTietSanPham){
         this.iViewChiTietSanPham=iViewChiTietSanPham;
         chiTietSanPhamModel =  new ChiTietSanPhamModel();
+        gioHangModel = new GioHangModel();
     }
 
     @Override
@@ -51,5 +56,20 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham{
             tb = sodanhgia/tongdg;
         }
         iViewChiTietSanPham.layTBSoSao((float) tb);
+    }
+
+    @Override
+    public void themGioHang(SanPham sanPham, Context context) {
+        gioHangModel.MoKetNoi(context);
+        boolean kq = gioHangModel.ThemGioHang(sanPham);
+        if (kq){
+            iViewChiTietSanPham.themGioHangThanhCong();
+        } else {
+            iViewChiTietSanPham.themGioHangThatBai();
+        }
+    }
+
+    public int soLuongSanPhamTrongGioHang(){
+        return gioHangModel.layDSsPTrongGioHang().size();
     }
 }

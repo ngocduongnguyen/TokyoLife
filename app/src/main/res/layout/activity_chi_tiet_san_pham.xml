@@ -303,6 +303,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <ImageView
+            android:id="@+id/imgThemGioHang"
             android:layout_marginLeft="@dimen/_2sdp"
             android:padding="@dimen/_9sdp"
             android:layout_weight="3"

@@ -9,5 +9,9 @@ public interface IViewChiTietSanPham {
     void hienThiChiTietSanPham(SanPham sanPham);
     void hienThiSliderSanPham(String[] linkHinhAnh);
     void hienThiDanhGia(List<DanhGia> ds);
+    //lấy trung bình số sao đánh giá RatingBar
     void layTBSoSao(float count);
+    //Thêm giỏ hàng
+    void themGioHangThanhCong();
+    void themGioHangThatBai();
 }
