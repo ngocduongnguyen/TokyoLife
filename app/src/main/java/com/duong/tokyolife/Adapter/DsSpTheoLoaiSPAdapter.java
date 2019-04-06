@@ -2,6 +2,7 @@ package com.duong.tokyolife.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.duong.tokyolife.Model.ObjectClass.SanPham;
 import com.duong.tokyolife.R;
+import com.duong.tokyolife.Utils.ServerName;
 import com.duong.tokyolife.View.ChiTietSanPham.ChiTietSanPhamActivity;
 import com.squareup.picasso.Picasso;
 
@@ -60,14 +62,33 @@ public class DsSpTheoLoaiSPAdapter extends RecyclerView.Adapter<DsSpTheoLoaiSPAd
         final SanPham sanPham = dsSanPham.get(i);
         sPbyLoaiHolder.txtTen.setText(sanPham.getTensp());
         Picasso.with(context).load(sanPham.getAnhlon()).resizeDimen(R.dimen._80sdp,R.dimen._100sdp).into(sPbyLoaiHolder.imageView);
+
+        int giaGoc = sanPham.getGia();
+        if (sanPham.getChiTietKhuyenMai()!=null){
+            int giakm = 0;
+            int phantramkm = sanPham.getChiTietKhuyenMai().getPhanTramKhuyenMai();
+            giakm = giaGoc*phantramkm/100;
+            NumberFormat numberFormat = new DecimalFormat("###,###");
+            String giaSP = numberFormat.format(giakm);
+            sPbyLoaiHolder.txtGia.setText(giaSP+" VNĐ");
+
+            String giaSPkm = numberFormat.format(giaGoc);
+            sPbyLoaiHolder.txtGiamGia.setVisibility(View.VISIBLE);
+            sPbyLoaiHolder.txtGiamGia.setText(giaSPkm+" VNĐ");
+            sPbyLoaiHolder.txtGiamGia.setPaintFlags(sPbyLoaiHolder.txtGiamGia.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            NumberFormat numberFormat = new DecimalFormat("###,###");
+            String giaSP = numberFormat.format(giaGoc);
+            sPbyLoaiHolder.txtGia.setText(giaSP+" VNĐ");
+        }
         //Định dạng tiền tệ
-        NumberFormat numberFormat = new DecimalFormat("###,###");
-        String giaSP = numberFormat.format(sanPham.getGia());
-        sPbyLoaiHolder.txtGia.setText(giaSP+" VNĐ");
+
+
+
         sPbyLoaiHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"Ma san pham: "+sanPham.getMasp(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,"Ma san pham: "+sanPham.getMasp(),Toast.LENGTH_SHORT).show();
                 Intent iChiTiet = new Intent(context, ChiTietSanPhamActivity.class);
                 iChiTiet.putExtra("masp",sanPham.getMasp());
                 context.startActivity(iChiTiet);

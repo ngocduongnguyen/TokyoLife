@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.duong.tokyolife.Model.ObjectClass.SanPham;
 import com.duong.tokyolife.R;
+import com.duong.tokyolife.Utils.ServerName;
 import com.duong.tokyolife.View.ChiTietSanPham.ChiTietSanPhamActivity;
 import com.squareup.picasso.Picasso;
 
@@ -67,7 +68,7 @@ public class DsSPTheoThuongHieuAdapter extends RecyclerView.Adapter<DsSPTheoThuo
         dsSpbyTH.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"Ma san pham: "+sanPham.getMasp(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,"Ma san pham: "+sanPham.getMasp(),Toast.LENGTH_SHORT).show();
                 Intent iChiTiet = new Intent(context, ChiTietSanPhamActivity.class);
                 iChiTiet.putExtra("masp",sanPham.getMasp());
                 context.startActivity(iChiTiet);

@@ -3,6 +3,7 @@ package com.duong.tokyolife.View.TrangChu;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,16 +15,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.duong.tokyolife.Adapter.MenuLoaiSanPhamAdapter;
 import com.duong.tokyolife.Adapter.ViewPagerTrangChuAdapter;
 import com.duong.tokyolife.Model.ObjectClass.LoaiSanPham;
 import com.duong.tokyolife.Model.DangNhap_DangKy.DangNhapModel;
+import com.duong.tokyolife.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.duong.tokyolife.Presenter.TrangChu.MenuLeft.PresenterLogicMenuLeftTrangChu;
 import com.duong.tokyolife.Presenter.TrangChu.OptionMenuRight.PresenterLogicOptionMenuFB;
 import com.duong.tokyolife.R;
 import com.duong.tokyolife.Utils.Data;
+import com.duong.tokyolife.View.ChiTietSanPham.ChiTietSanPhamActivity;
 import com.duong.tokyolife.View.DangNhap_DangKy.DangNhap_DangKyActivity;
+import com.duong.tokyolife.View.GioHang.GioHangActivity;
 import com.duong.tokyolife.View.HienThiSPTheoLoaiSP.HienThiSPTheoLoaiSPActivity;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
@@ -70,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
     GoogleSignInResult googleSignInResult;
 
     String cacheDatabase;
+
+    TextView txt_giohangsl;
+    PresenterLogicChiTietSanPham presenterLogicChiTietSanPham;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         //Khai bao model de lay google thong tin tu google sign in result
         dangNhapModel = new DangNhapModel();
         googleApiClient = dangNhapModel.layGoogleAPIClient(this,this);
+
     }
 
     private void addEvents() {
@@ -184,6 +194,19 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
             menuItemDangXuat.setVisible(true);
         }
 
+        MenuItem itemGioHang = menu.findItem(R.id.itGioHang);
+        View giaoDienCustomGioHang = MenuItemCompat.getActionView(itemGioHang);
+        txt_giohangsl = giaoDienCustomGioHang.findViewById(R.id.txtGioHangSL);
+        txt_giohangsl.setText(String.valueOf(presenterLogicOptionMenuFB.soLuongSanPhamTrongGioHang(MainActivity.this)));
+
+        txt_giohangsl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iGioHang = new Intent(MainActivity.this, GioHangActivity.class);
+                startActivity(iGioHang);
+            }
+        });
+
         return true;
     }
 
@@ -232,6 +255,21 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        MenuItem itemGioHang = menu.findItem(R.id.itGioHang);
+        View giaoDienCustomGioHang = MenuItemCompat.getActionView(itemGioHang);
+        txt_giohangsl = giaoDienCustomGioHang.findViewById(R.id.txtGioHangSL);
+        txt_giohangsl.setText(String.valueOf(presenterLogicOptionMenuFB.soLuongSanPhamTrongGioHang(MainActivity.this)));
+        txt_giohangsl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iGioHang = new Intent(MainActivity.this, GioHangActivity.class);
+                startActivity(iGioHang);
+            }
+        });
     }
 }

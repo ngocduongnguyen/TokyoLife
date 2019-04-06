@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardViewSanPham"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_5sdp"
+    android:layout_margin="@dimen/_5sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_margin="@dimen/_3sdp"
+            android:id="@+id/linearItemSanPham"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_hinh_giohang"
+                android:scaleType="centerCrop"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_100sdp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="@dimen/_12sdp"
+                    android:id="@+id/txtTieudeGiohang"
+                    android:text="Oppo"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtGiaGiohang"
+                    android:padding="@dimen/_3sdp"
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:text="Oppo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_gravity="center"
+                    android:id="@+id/txt_giamGiaSp"
+                    android:text="Oppo"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/btnCong"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:drawableStart="@drawable/baseline_add_black_18dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <View
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@color/colorRed"/>
+
+                    <TextView
+                        android:id="@+id/txtSoLuong"
+                        android:layout_weight="1"
+                        android:text="1"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_20sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <View
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@color/colorRed"/>
+
+                    <Button
+                        android:id="@+id/btnTru"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:drawableStart="@drawable/baseline_remove_black_18dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="6"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btnXoa"
+                android:drawableStart="@drawable/baseline_delete_forever_black_18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

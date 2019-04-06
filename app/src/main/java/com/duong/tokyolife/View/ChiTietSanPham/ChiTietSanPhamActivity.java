@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,8 +14,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -23,15 +27,22 @@ import android.widget.Toast;
 
 import com.duong.tokyolife.Adapter.DsDanhGiaSanPhamAdapter;
 import com.duong.tokyolife.Adapter.ViewPagerSliderAdapter;
+import com.duong.tokyolife.Model.GioHang.DataSanPham;
 import com.duong.tokyolife.Model.ObjectClass.ChiTietSanPham;
 import com.duong.tokyolife.Model.ObjectClass.DanhGia;
 import com.duong.tokyolife.Model.ObjectClass.SanPham;
 import com.duong.tokyolife.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.duong.tokyolife.Presenter.DanhGia.PresenterLogicDanhGia;
+import com.duong.tokyolife.Presenter.TrangChu.OptionMenuRight.PresenterLogicOptionMenuFB;
 import com.duong.tokyolife.R;
+import com.duong.tokyolife.Utils.Data;
 import com.duong.tokyolife.Utils.ServerName;
+import com.duong.tokyolife.View.DangNhap_DangKy.DangNhap_DangKyActivity;
 import com.duong.tokyolife.View.DanhGia.DanhSachDanhGiaActivity;
 import com.duong.tokyolife.View.DanhGia.ThemDanhGiaActivity;
+import com.duong.tokyolife.View.GioHang.GioHangActivity;
+import com.duong.tokyolife.View.ThanhToan.ThanhToanActivity;
+import com.duong.tokyolife.View.TrangChu.MainActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
@@ -44,15 +55,19 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     Toolbar toolbar;
     ViewPager viewPager;
     PresenterLogicChiTietSanPham presenterLogicChiTietSanPham;
+    PresenterLogicOptionMenuFB presenterLogicOptionMenuFB;
     List<Fragment> dsFragment;
     TextView[] txtDots;
     LinearLayout layoutDotsChiTiet,layoutThongSoKT;
-    TextView txtTenSanPham,txtGiaTien,txtThongtinChiTiet,txtVietDanhGia,txtXemtatcadanhgia;
+    TextView txtTenSanPham,txtGiaTien,txtThongtinChiTiet,txtVietDanhGia,txtXemtatcadanhgia,txt_giohangsl;
     RecyclerView recyclerView;
     RatingBar ratingBar;
     ImageView imgThemGioHang;
+    Button btnMuaNgay;
 
     SanPham sanPhamGioHang;
+    Menu menu;
+    boolean onpause = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +79,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         txtTenSanPham = findViewById(R.id.txt_tenSanPham);
         txtGiaTien = findViewById(R.id.txt_giaSanPham);
         ratingBar=findViewById(R.id.rbDanhGia);
+
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+
         txtThongtinChiTiet = findViewById(R.id.txtThongtinChiTiet);
         layoutThongSoKT = findViewById(R.id.linearThongSoKT);
         recyclerView = findViewById(R.id.recycler_danhgia);
@@ -72,6 +91,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         imgThemGioHang = findViewById(R.id.imgThemGioHang);
 
         txtVietDanhGia=findViewById(R.id.txt_vietDanhGia);
+
+        btnMuaNgay = findViewById(R.id.btnMuangay);
+
+        presenterLogicOptionMenuFB = new PresenterLogicOptionMenuFB();
 
         Intent intent = getIntent();
         final int masp = intent.getIntExtra("masp",0);
@@ -98,6 +121,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
             }
         });
 
+        //thêm giỏ hàng
         imgThemGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +135,35 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
                 byte[] hinhsanphamgiohang = byteArrayOutputStream.toByteArray();
 
                 sanPhamGioHang.setHinhGioHang(hinhsanphamgiohang);
+                sanPhamGioHang.setSoluong(1);
                 presenterLogicChiTietSanPham.themGioHang(sanPhamGioHang,ChiTietSanPhamActivity.this);
+            }
+        });
+
+        btnMuaNgay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Data.code.equals("")){
+                    Toast.makeText(ChiTietSanPhamActivity.this,"Bạn phải đăng nhập để mua hàng!",Toast.LENGTH_SHORT).show();
+                    Intent iDangNhap = new Intent(ChiTietSanPhamActivity.this, DangNhap_DangKyActivity.class);
+                    startActivity(iDangNhap);
+                } else {
+                Fragment fragment = dsFragment.get(0);
+                View view = fragment.getView();
+                ImageView imageView = view.findViewById(R.id.img_slider_chitiet);
+                Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+                byte[] hinhsanphamgiohang = byteArrayOutputStream.toByteArray();
+
+                sanPhamGioHang.setHinhGioHang(hinhsanphamgiohang);
+                sanPhamGioHang.setSoluong(1);
+                presenterLogicChiTietSanPham.themGioHang(sanPhamGioHang,ChiTietSanPhamActivity.this);
+
+                Intent iThanhToan = new Intent(ChiTietSanPhamActivity.this,ThanhToanActivity.class);
+                startActivity(iThanhToan);
+                }
             }
         });
     }
@@ -120,7 +172,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     public void hienThiChiTietSanPham(SanPham sanPham) {
 
         sanPhamGioHang = sanPham;
-
+        sanPhamGioHang.setSoluongtonkho(sanPham.getSoluongtonkho());
         txtTenSanPham.setText(sanPham.getTensp());
         Format format = new DecimalFormat("###,###");
         String gia = ((DecimalFormat) format).format(sanPham.getGia());
@@ -222,6 +274,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     @Override
     public void themGioHangThanhCong() {
         Toast.makeText(ChiTietSanPhamActivity.this,"Thêm vào giở hàng thành công!",Toast.LENGTH_SHORT).show();
+        txt_giohangsl.setText(String.valueOf(presenterLogicOptionMenuFB.soLuongSanPhamTrongGioHang(ChiTietSanPhamActivity.this)));
     }
 
     @Override
@@ -229,4 +282,46 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         Toast.makeText(ChiTietSanPhamActivity.this,"Sản phẩm đã có trong giỏ hàng!",Toast.LENGTH_SHORT).show();
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_phai_trangchu,menu);
+        this.menu=menu;
+        MenuItem itemGioHang = menu.findItem(R.id.itGioHang);
+        View giaoDienCustomGioHang = MenuItemCompat.getActionView(itemGioHang);
+        txt_giohangsl = giaoDienCustomGioHang.findViewById(R.id.txtGioHangSL);
+        txt_giohangsl.setText(String.valueOf(presenterLogicOptionMenuFB.soLuongSanPhamTrongGioHang(ChiTietSanPhamActivity.this)));
+        txt_giohangsl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iGioHang = new Intent(ChiTietSanPhamActivity.this, GioHangActivity.class);
+                startActivity(iGioHang);
+            }
+        });
+        return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (onpause){
+            MenuItem itemGioHang = menu.findItem(R.id.itGioHang);
+            View giaoDienCustomGioHang = MenuItemCompat.getActionView(itemGioHang);
+            txt_giohangsl = giaoDienCustomGioHang.findViewById(R.id.txtGioHangSL);
+            txt_giohangsl.setText(String.valueOf(presenterLogicOptionMenuFB.soLuongSanPhamTrongGioHang(ChiTietSanPhamActivity.this)));
+            txt_giohangsl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent iGioHang = new Intent(ChiTietSanPhamActivity.this, GioHangActivity.class);
+                    startActivity(iGioHang);
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onpause = true;
+    }
 }

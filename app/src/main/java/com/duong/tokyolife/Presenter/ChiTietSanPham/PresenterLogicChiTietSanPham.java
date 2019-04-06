@@ -1,12 +1,17 @@
 package com.duong.tokyolife.Presenter.ChiTietSanPham;
 
 import android.content.Context;
+import android.support.v4.view.MenuItemCompat;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.duong.tokyolife.Model.ChiTietSanPham.ChiTietSanPhamModel;
 import com.duong.tokyolife.Model.GioHang.GioHangModel;
 import com.duong.tokyolife.Model.ObjectClass.DanhGia;
 import com.duong.tokyolife.Model.ObjectClass.SanPham;
+import com.duong.tokyolife.R;
 import com.duong.tokyolife.View.ChiTietSanPham.IViewChiTietSanPham;
+import com.duong.tokyolife.View.TrangChu.MainActivity;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -67,9 +72,5 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham{
         } else {
             iViewChiTietSanPham.themGioHangThatBai();
         }
-    }
-
-    public int soLuongSanPhamTrongGioHang(){
-        return gioHangModel.layDSsPTrongGioHang().size();
     }
 }

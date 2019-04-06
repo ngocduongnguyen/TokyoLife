@@ -46,6 +46,7 @@ public class ChiTietSanPhamModel {
                 sanPham.setAnhnho(spJson.getString("hinhnho"));
                 sanPham.setThongtin(spJson.getString("thongtin"));
                 sanPham.setSoluong(spJson.getInt("soluong"));
+                sanPham.setSoluongtonkho(spJson.getInt("soluong"));
                 sanPham.setMaloaisp(spJson.getInt("maloaisp"));
                 sanPham.setMath(spJson.getInt("math"));
                 sanPham.setLuotmua(spJson.getInt("luotmua"));

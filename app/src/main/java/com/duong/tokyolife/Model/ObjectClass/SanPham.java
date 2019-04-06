@@ -3,10 +3,19 @@ package com.duong.tokyolife.Model.ObjectClass;
 import java.util.List;
 
 public class SanPham {
-    private int masp,gia,soluong,maloaisp,math,luotmua;
+    private int masp,gia,soluong,maloaisp,math,luotmua,soluongtonkho;
     private String tensp,anhlon,anhnho,thongtin;
     private List<ChiTietSanPham> dsChiTietSP;
     private byte[] hinhGioHang;
+    ChiTietKhuyenMai chiTietKhuyenMai;
+
+    public ChiTietKhuyenMai getChiTietKhuyenMai() {
+        return chiTietKhuyenMai;
+    }
+
+    public void setChiTietKhuyenMai(ChiTietKhuyenMai chiTietKhuyenMai) {
+        this.chiTietKhuyenMai = chiTietKhuyenMai;
+    }
 
     public byte[] getHinhGioHang() {
         return hinhGioHang;
@@ -14,6 +23,14 @@ public class SanPham {
 
     public void setHinhGioHang(byte[] hinhGioHang) {
         this.hinhGioHang = hinhGioHang;
+    }
+
+    public int getSoluongtonkho() {
+        return soluongtonkho;
+    }
+
+    public void setSoluongtonkho(int soluongtonkho) {
+        this.soluongtonkho = soluongtonkho;
     }
 
     public int getMasp() {
