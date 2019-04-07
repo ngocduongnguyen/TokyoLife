@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,11 +32,13 @@ import com.duong.tokyolife.View.ChiTietSanPham.ChiTietSanPhamActivity;
 import com.duong.tokyolife.View.DangNhap_DangKy.DangNhap_DangKyActivity;
 import com.duong.tokyolife.View.GioHang.GioHangActivity;
 import com.duong.tokyolife.View.HienThiSPTheoLoaiSP.HienThiSPTheoLoaiSPActivity;
+import com.duong.tokyolife.View.TimKiem.TimKiemActivity;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
+import com.facebook.marketing.internal.ButtonIndexer;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
     //tab
     ViewPager viewPager;
     //menu phai
+    Button btnTimKiem;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     //menu trái
@@ -98,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         viewPager=findViewById(R.id.viewPagerTrangChu);
         drawerLayout=findViewById(R.id.drawerLayout);
         listView=findViewById(R.id.lvMenuTrangChu);
+        btnTimKiem=findViewById(R.id.btnTkHome);
 
         //hien thi menu phai
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close);
@@ -138,6 +143,14 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
                 Intent iSanPham = new Intent(MainActivity.this, HienThiSPTheoLoaiSPActivity.class);
                 iSanPham.putExtra("maloaisp",listMenuTrai.get(position).getMaLoaiSP());
                 startActivity(iSanPham);
+            }
+        });
+
+        btnTimKiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iTimKiem = new Intent(MainActivity.this, TimKiemActivity.class);
+                startActivity(iTimKiem);
             }
         });
     }

@@ -2,6 +2,7 @@ package com.duong.tokyolife.View.ChiTietSanPham;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.v4.app.Fragment;
@@ -47,6 +48,7 @@ import com.duong.tokyolife.View.TrangChu.MainActivity;
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.text.Format;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +61,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     List<Fragment> dsFragment;
     TextView[] txtDots;
     LinearLayout layoutDotsChiTiet,layoutThongSoKT;
-    TextView txtTenSanPham,txtGiaTien,txtThongtinChiTiet,txtVietDanhGia,txtXemtatcadanhgia,txt_giohangsl;
+    TextView txtTenSanPham,txtGiaTien,txtThongtinChiTiet,txtVietDanhGia,txtXemtatcadanhgia,txt_giohangsl,txtGiamGia;
     RecyclerView recyclerView;
     RatingBar ratingBar;
     ImageView imgThemGioHang;
@@ -89,6 +91,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         recyclerView = findViewById(R.id.recycler_danhgia);
         txtXemtatcadanhgia = findViewById(R.id.txt_xemtatcadanhgia);
         imgThemGioHang = findViewById(R.id.imgThemGioHang);
+        txtGiamGia = findViewById(R.id.txt_giamGiaSanPham);
 
         txtVietDanhGia=findViewById(R.id.txt_vietDanhGia);
 
@@ -173,14 +176,32 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
 
         sanPhamGioHang = sanPham;
         sanPhamGioHang.setSoluongtonkho(sanPham.getSoluongtonkho());
-        txtTenSanPham.setText(sanPham.getTensp());
-        Format format = new DecimalFormat("###,###");
-        String gia = ((DecimalFormat) format).format(sanPham.getGia());
-        txtGiaTien.setText(gia+" VNĐ");
+        txtTenSanPham.setText(sanPhamGioHang.getTensp());
+
+        int giaGoc = sanPhamGioHang.getGia();
+        if (sanPhamGioHang.getChiTietKhuyenMai()!=null){
+            int phantramkm = sanPhamGioHang.getChiTietKhuyenMai().getPhanTramKhuyenMai();
+            if (phantramkm!=0){
+                int giakm = 0;
+                giakm = giaGoc*phantramkm/100;
+                NumberFormat numberFormat = new DecimalFormat("###,###");
+                String giaSP = numberFormat.format(giakm);
+                txtGiaTien.setText(giaSP+" VNĐ");
+
+                String giaSPkm = numberFormat.format(giaGoc);
+                txtGiamGia.setVisibility(View.VISIBLE);
+                txtGiamGia.setText(giaSPkm+" VNĐ");
+                txtGiamGia.setPaintFlags(txtGiamGia.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+        } else {
+            NumberFormat numberFormat = new DecimalFormat("###,###");
+            String giaSP = numberFormat.format(giaGoc);
+            txtGiaTien.setText(giaSP+" VNĐ");
+        }
         txtThongtinChiTiet.setText(sanPham.getThongtin());
 
         //tạo thông số kỹ thuật
-        List<ChiTietSanPham> dsCT = sanPham.getDsChiTietSP();
+        List<ChiTietSanPham> dsCT = sanPhamGioHang.getDsChiTietSP();
         for (int i=0;i<dsCT.size();i++){
             LinearLayout linearLayout = new LinearLayout(this);
             linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -285,7 +306,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_phai_trangchu,menu);
+        getMenuInflater().inflate(R.menu.menu_giohang,menu);
         this.menu=menu;
         MenuItem itemGioHang = menu.findItem(R.id.itGioHang);
         View giaoDienCustomGioHang = MenuItemCompat.getActionView(itemGioHang);

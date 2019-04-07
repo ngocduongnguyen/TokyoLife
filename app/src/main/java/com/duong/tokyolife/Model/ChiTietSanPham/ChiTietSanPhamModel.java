@@ -2,6 +2,7 @@ package com.duong.tokyolife.Model.ChiTietSanPham;
 
 import android.widget.ListView;
 
+import com.duong.tokyolife.Model.ObjectClass.ChiTietKhuyenMai;
 import com.duong.tokyolife.Model.ObjectClass.ChiTietSanPham;
 import com.duong.tokyolife.Model.ObjectClass.DanhGia;
 import com.duong.tokyolife.Model.ObjectClass.SanPham;
@@ -39,6 +40,11 @@ public class ChiTietSanPhamModel {
             int count = jsonArray.length();
             for (int i=0;i<count;i++){
                 JSONObject spJson = jsonArray.getJSONObject(i);
+
+                ChiTietKhuyenMai chiTietKhuyenMai = new ChiTietKhuyenMai();
+                chiTietKhuyenMai.setPhanTramKhuyenMai(spJson.getInt("phantramkm"));
+                sanPham.setChiTietKhuyenMai(chiTietKhuyenMai);
+
                 sanPham.setMasp(spJson.getInt("masp"));
                 sanPham.setTensp(spJson.getString("tensp"));
                 sanPham.setGia(spJson.getInt("gia"));
