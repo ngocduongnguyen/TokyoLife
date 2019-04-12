@@ -207,22 +207,22 @@
                     </LinearLayout>
 
                     <!--Thông số kỹ thuật-->
-                    <LinearLayout
-                        android:id="@+id/linearThongSoKT"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@color/colorWhite"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <!--<LinearLayout-->
+                        <!--android:id="@+id/linearThongSoKT"-->
+                        <!--android:layout_marginTop="@dimen/_10sdp"-->
+                        <!--android:background="@color/colorWhite"-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
 
-                        <TextView
-                            android:text="Thông số kỹ thuật"
-                            android:padding="@dimen/_5sdp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                        <!--<TextView-->
+                            <!--android:text="Thông số kỹ thuật"-->
+                            <!--android:padding="@dimen/_5sdp"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content" />-->
 
 
-                    </LinearLayout>
+                    <!--</LinearLayout>-->
 
                     <!--Đánh giá và nhận xét-->
                     <LinearLayout

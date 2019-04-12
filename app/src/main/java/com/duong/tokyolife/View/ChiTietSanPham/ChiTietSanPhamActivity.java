@@ -87,7 +87,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         setSupportActionBar(toolbar);
 
         txtThongtinChiTiet = findViewById(R.id.txtThongtinChiTiet);
-        layoutThongSoKT = findViewById(R.id.linearThongSoKT);
+//        layoutThongSoKT = findViewById(R.id.linearThongSoKT);
         recyclerView = findViewById(R.id.recycler_danhgia);
         txtXemtatcadanhgia = findViewById(R.id.txt_xemtatcadanhgia);
         imgThemGioHang = findViewById(R.id.imgThemGioHang);
@@ -198,29 +198,29 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
             String giaSP = numberFormat.format(giaGoc);
             txtGiaTien.setText(giaSP+" VNĐ");
         }
-        txtThongtinChiTiet.setText(sanPham.getThongtin());
+        txtThongtinChiTiet.setText(Html.fromHtml(sanPham.getThongtin()));
 
-        //tạo thông số kỹ thuật
-        List<ChiTietSanPham> dsCT = sanPhamGioHang.getDsChiTietSP();
-        for (int i=0;i<dsCT.size();i++){
-            LinearLayout linearLayout = new LinearLayout(this);
-            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-            TextView txtTenThongSo = new TextView(this);
-            txtTenThongSo.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
-            txtTenThongSo.setText(dsCT.get(i).getChiTietSP());
-            txtTenThongSo.setPadding(20,0,0,0);
-
-            TextView txtGiaTri = new TextView(this);
-            txtGiaTri.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
-            txtGiaTri.setText(dsCT.get(i).getGiaTri());
-
-            linearLayout.addView(txtTenThongSo);
-            linearLayout.addView(txtGiaTri);
-
-            layoutThongSoKT.addView(linearLayout);
-        }
+//        //tạo thông số kỹ thuật
+//        List<ChiTietSanPham> dsCT = sanPhamGioHang.getDsChiTietSP();
+//        for (int i=0;i<dsCT.size();i++){
+//            LinearLayout linearLayout = new LinearLayout(this);
+//            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+//
+//            TextView txtTenThongSo = new TextView(this);
+//            txtTenThongSo.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
+//            txtTenThongSo.setText(dsCT.get(i).getChiTietSP());
+//            txtTenThongSo.setPadding(20,0,0,0);
+//
+//            TextView txtGiaTri = new TextView(this);
+//            txtGiaTri.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
+//            txtGiaTri.setText(dsCT.get(i).getGiaTri());
+//
+//            linearLayout.addView(txtTenThongSo);
+//            linearLayout.addView(txtGiaTri);
+//
+//            layoutThongSoKT.addView(linearLayout);
+//        }
     }
 
     @Override
