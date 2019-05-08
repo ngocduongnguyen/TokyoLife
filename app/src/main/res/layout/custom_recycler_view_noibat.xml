@@ -19,7 +19,11 @@
 
     <TextView
         android:text="Các thương hiệu lớn"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textAlignment="center"
+        android:layout_margin="@dimen/_10sdp"
+        android:textSize="@dimen/_15sdp"
+        android:background="@android:color/holo_red_light"
+        android:textColor="@android:color/white"
         android:padding="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -33,8 +37,12 @@
     </android.support.v7.widget.RecyclerView>
 
     <TextView
-        android:text="Sản phẩm mới"
-        android:textColor="@android:color/holo_blue_dark"
+        android:text="Sản phẩm được mua nhiều nhất"
+        android:textAlignment="center"
+        android:background="@android:color/holo_red_light"
+        android:layout_margin="@dimen/_10sdp"
+        android:textSize="@dimen/_15sdp"
+        android:textColor="@android:color/white"
         android:padding="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >

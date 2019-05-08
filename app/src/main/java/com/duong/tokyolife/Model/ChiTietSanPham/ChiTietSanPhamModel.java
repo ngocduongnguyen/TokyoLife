@@ -40,11 +40,6 @@ public class ChiTietSanPhamModel {
             int count = jsonArray.length();
             for (int i=0;i<count;i++){
                 JSONObject spJson = jsonArray.getJSONObject(i);
-
-                ChiTietKhuyenMai chiTietKhuyenMai = new ChiTietKhuyenMai();
-                chiTietKhuyenMai.setPhanTramKhuyenMai(spJson.getInt("phantramkm"));
-                sanPham.setChiTietKhuyenMai(chiTietKhuyenMai);
-
                 sanPham.setMasp(spJson.getInt("masp"));
                 sanPham.setTensp(spJson.getString("tensp"));
                 sanPham.setGia(spJson.getInt("gia"));
@@ -56,18 +51,7 @@ public class ChiTietSanPhamModel {
                 sanPham.setMaloaisp(spJson.getInt("maloaisp"));
                 sanPham.setMath(spJson.getInt("math"));
                 sanPham.setLuotmua(spJson.getInt("luotmua"));
-                //lay danh sach thong tin
-                List<ChiTietSanPham> ds = new ArrayList<>();
-                JSONArray dsThongTin = spJson.getJSONArray("dsthongtin");
-                int countTT = dsThongTin.length();
-                for (int j=0;j<countTT;j++){
-                    JSONObject ttJson = dsThongTin.getJSONObject(j);
-                    ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
-                    chiTietSanPham.setChiTietSP(ttJson.getString("chitietsp"));
-                    chiTietSanPham.setGiaTri(ttJson.getString("giatri"));
-                    ds.add(chiTietSanPham);
-                }
-                sanPham.setDsChiTietSP(ds);
+                sanPham.setGiamgia(spJson.getInt("giamgia"));
             }
 
         } catch (ExecutionException e) {

@@ -44,20 +44,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/txtGiaGiohang"
-                    android:padding="@dimen/_3sdp"
-                    android:layout_marginLeft="@dimen/_2sdp"
-                    android:text="Oppo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_gravity="center"
-                    android:id="@+id/txt_giamGiaSp"
-                    android:text="Oppo"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/txtGiaGiohang"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:text="Oppo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_gravity="center"
+                        android:id="@+id/txt_giamGiaSp"
+                        android:text="Oppo"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"

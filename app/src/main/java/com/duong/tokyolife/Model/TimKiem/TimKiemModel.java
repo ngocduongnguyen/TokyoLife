@@ -40,10 +40,7 @@ public class TimKiemModel {
                 sanPham.setTensp(spObject.getString("tensp"));
                 sanPham.setAnhlon(ServerName.SERVER_IMG+spObject.getString("hinhlon"));
                 sanPham.setGia(spObject.getInt("gia"));
-
-                ChiTietKhuyenMai chiTietKhuyenMai = new ChiTietKhuyenMai();
-                chiTietKhuyenMai.setPhanTramKhuyenMai(spObject.getInt("phantramkm"));
-                sanPham.setChiTietKhuyenMai(chiTietKhuyenMai);
+                sanPham.setGiamgia(spObject.getInt("giamgia"));
 
                 dsSP.add(sanPham);
             }

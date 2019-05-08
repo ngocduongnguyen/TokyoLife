@@ -159,6 +159,7 @@ public class ThanhToanActivity extends AppCompatActivity implements IViewThanhTo
             ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
             chiTietHoaDon.setMaSp(dsSanPham.get(i).getMasp());
             chiTietHoaDon.setSoLuong(dsSanPham.get(i).getSoluong());
+            chiTietHoaDon.setGiamGia(dsSanPham.get(i).getGiamgia());
             chiTietHoaDons.add(chiTietHoaDon);
         }
     }

@@ -27,7 +27,7 @@ public class PresenterLogicNoiBat implements IPresenterNoiBat {
         noiBat.setListThuongHieuNoiBat(dsThuongHieu);
         noiBat.setListLoaiSpNoiBat(dsSanPham);
         dsNoiBat.add(noiBat);
-        if (dsSanPham.size()>0&&dsThuongHieu.size()>0){
+        if (dsThuongHieu.size()>0){
             iViewNoiBat.hienThiDanhSachNoiBat(dsNoiBat);
         }
     }

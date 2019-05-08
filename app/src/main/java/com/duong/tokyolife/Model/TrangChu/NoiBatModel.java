@@ -45,8 +45,8 @@ public class NoiBatModel {
 //                sanPham.setAnhnho(spObject.getString("anhnho"));
 //                sanPham.setThongtin(spObject.getString("thongtin"));
                 sanPham.setGia(spObject.getInt("gia"));
-//                sanPham.setSoluong(spObject.getInt("soluong"));
-//                sanPham.setMaloaisp(spObject.getInt("maloaisp"));
+                sanPham.setSoluong(spObject.getInt("soluong"));
+                sanPham.setGiamgia(spObject.getInt("giamgia"));
 //                sanPham.setMath(spObject.getInt("math"));
 //                sanPham.setLuotmua(spObject.getInt("luotmua"));
 

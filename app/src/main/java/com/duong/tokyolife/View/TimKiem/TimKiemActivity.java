@@ -11,7 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.duong.tokyolife.Adapter.DsSPTheoThuongHieuAdapter;
+import com.duong.tokyolife.Adapter.DanhSachSanPhamAdapter;
 import com.duong.tokyolife.Model.ObjectClass.SanPham;
 import com.duong.tokyolife.Presenter.TimKiem.PresenterLogicTimKiem;
 import com.duong.tokyolife.R;
@@ -56,7 +56,7 @@ public class TimKiemActivity extends AppCompatActivity implements IViewTimKiem, 
     @Override
     public void hienthidanhsachtimkiem(List<SanPham> ds) {
 
-        DsSPTheoThuongHieuAdapter dsSPTheoThuongHieuAdapter = new DsSPTheoThuongHieuAdapter(this,ds);
+        DanhSachSanPhamAdapter dsSPTheoThuongHieuAdapter = new DanhSachSanPhamAdapter(this,ds);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(dsSPTheoThuongHieuAdapter);

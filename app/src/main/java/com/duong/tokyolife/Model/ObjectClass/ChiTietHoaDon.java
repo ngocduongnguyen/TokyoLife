@@ -2,7 +2,19 @@ package com.duong.tokyolife.Model.ObjectClass;
 
 public class ChiTietHoaDon {
 
-    int maHd,maSp,soLuong;
+    int maHd;
+    int maSp;
+    int soLuong;
+
+    public int getGiamGia() {
+        return giamGia;
+    }
+
+    public void setGiamGia(int giamGia) {
+        this.giamGia = giamGia;
+    }
+
+    int giamGia;
 
     public int getMaHd() {
         return maHd;

@@ -30,7 +30,9 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham{
 
     @Override
     public void layChiTietSanPham(int masp) {
-        SanPham sanPham = chiTietSanPhamModel.layChiTietSP(masp);
+        SanPham sanPham = new SanPham();
+        if (masp>0)
+            sanPham = chiTietSanPhamModel.layChiTietSP(masp);
         if (sanPham.getMasp()>0){
             iViewChiTietSanPham.hienThiChiTietSanPham(sanPham);
             String[] hinhnho = sanPham.getAnhnho().split(",");

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.duong.tokyolife.Adapter.ViewPagerDangKyDangNhapAdapter;
+import com.duong.tokyolife.Model.ChiTietSanPham.ChiTietSanPhamModel;
 import com.duong.tokyolife.R;
 
 public class DangNhap_DangKyActivity extends AppCompatActivity {

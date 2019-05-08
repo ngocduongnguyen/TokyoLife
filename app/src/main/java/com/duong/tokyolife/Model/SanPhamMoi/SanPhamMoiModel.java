@@ -1,4 +1,4 @@
-package com.duong.tokyolife.Model.HienThiSPTheoLoaiSP;
+package com.duong.tokyolife.Model.SanPhamMoi;
 
 import com.duong.tokyolife.Model.ObjectClass.SanPham;
 import com.duong.tokyolife.Utils.DownloadJSON;
@@ -13,25 +13,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class HienThiSPTheoLoaiSPModel {
-
-    public List<SanPham> layDanhSachSPtheoLoaiSP(int maloaisp){
+public class SanPhamMoiModel {
+    public List<SanPham> layDanhSachSpMoi(){
         List<SanPham> dsSP = new ArrayList<>();
 
         List<HashMap<String,String>> attrs = new ArrayList<>();
         HashMap<String,String> hsGoiHam = new HashMap<>();
-        hsGoiHam.put("goiham","layDanhSachSanPhamTheoMaLoai");
-        HashMap<String,String> hsMath = new HashMap<>();
-        hsMath.put("maloaisp",String.valueOf(maloaisp));
+        hsGoiHam.put("goiham","layDanhSachSpMoi");
         attrs.add(hsGoiHam);
-        attrs.add(hsMath);
         DownloadJSON downloadJSON = new DownloadJSON(ServerName.SERVER_NAME,attrs);
         downloadJSON.execute();
 
         try {
             String dataJson = downloadJSON.get();
             JSONObject jsonObject = new JSONObject(dataJson);
-            JSONArray jsonArray = jsonObject.getJSONArray("sanphambymaloaisp");
+            JSONArray jsonArray = jsonObject.getJSONArray("dssanphammoi");
             int count = jsonArray.length();
             for (int i=0;i<count;i++){
                 JSONObject spObject = jsonArray.getJSONObject(i);
@@ -52,5 +48,4 @@ public class HienThiSPTheoLoaiSPModel {
         }
         return dsSP;
     }
-
 }

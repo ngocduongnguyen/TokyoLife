@@ -3,6 +3,7 @@ package com.duong.tokyolife.Adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,13 +34,14 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtTieude,txtGia,txtSoluong;
+        TextView txtTieude,txtGia,txtSoluong,txtGiamGia;
         ImageView imgHinhGioHang;
         Button  btnXoaGioHang,btnCong,btnTru;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
                 txtTieude = itemView.findViewById(R.id.txtTieudeGiohang);
                 txtGia = itemView.findViewById(R.id.txtGiaGiohang);
+                txtGiamGia = itemView.findViewById(R.id.txt_giamGiaSp);
                 txtSoluong = itemView.findViewById(R.id.txtSoLuong);
                 imgHinhGioHang = itemView.findViewById(R.id.img_hinh_giohang);
                 btnXoaGioHang = itemView.findViewById(R.id.btnXoa);
@@ -62,9 +64,24 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         final SanPham sanPham = ds.get(i);
         viewHolder.txtTieude.setText(sanPham.getTensp());
 
-        NumberFormat format = new DecimalFormat("###.###");
-        String gia = format.format(sanPham.getGia());
-        viewHolder.txtGia.setText(gia+" VND");
+        int giaGoc = sanPham.getGia();
+        if (sanPham.getGiamgia()!=0){
+            int giakm = 0;
+            int phantramkm = sanPham.getGiamgia();
+            giakm = giaGoc-giaGoc*phantramkm/100;
+            NumberFormat numberFormat = new DecimalFormat("###,###");
+            String giaSP = numberFormat.format(giakm);
+            viewHolder.txtGia.setText(giaSP+" VNĐ");
+
+            String giaSPkm = numberFormat.format(giaGoc);
+            viewHolder.txtGiamGia.setVisibility(View.VISIBLE);
+            viewHolder.txtGiamGia.setText(giaSPkm+" VNĐ");
+            viewHolder.txtGiamGia.setPaintFlags(viewHolder.txtGiamGia.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            NumberFormat numberFormat = new DecimalFormat("###,###");
+            String giaSP = numberFormat.format(giaGoc);
+            viewHolder.txtGia.setText(giaSP+" VNĐ");
+        }
 
         byte[] hinhgiohang = sanPham.getHinhGioHang();
         Bitmap bitmap = BitmapFactory.decodeByteArray(hinhgiohang,0,hinhgiohang.length);

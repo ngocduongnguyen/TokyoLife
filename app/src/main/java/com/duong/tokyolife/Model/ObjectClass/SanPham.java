@@ -3,7 +3,17 @@ package com.duong.tokyolife.Model.ObjectClass;
 import java.util.List;
 
 public class SanPham {
-    private int masp,gia,soluong,maloaisp,math,luotmua,soluongtonkho;
+    private int masp;
+    private int gia;
+    private int soluong;
+    private int maloaisp;
+    private int math;
+    private int luotmua;
+    private int soluongtonkho;
+
+
+
+    private int giamgia;
     private String tensp,anhlon,anhnho,thongtin;
     private List<ChiTietSanPham> dsChiTietSP;
     private byte[] hinhGioHang;
@@ -119,5 +129,13 @@ public class SanPham {
 
     public void setDsChiTietSP(List<ChiTietSanPham> dsChiTietSP) {
         this.dsChiTietSP = dsChiTietSP;
+    }
+
+    public int getGiamgia() {
+        return giamgia;
+    }
+
+    public void setGiamgia(int giamgia) {
+        this.giamgia = giamgia;
     }
 }

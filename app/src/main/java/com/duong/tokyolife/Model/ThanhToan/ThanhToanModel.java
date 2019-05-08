@@ -26,7 +26,7 @@ public class ThanhToanModel {
         hmGoiHam.put("goiham","themHoaDon");
 
         //lay list chi tiet hoa don
-        List<ChiTietHoaDon> dsChiTietHoaDon = new ArrayList<>();
+//        List<ChiTietHoaDon> dsChiTietHoaDon = new ArrayList<>();
         StringBuilder chuoiJson = new StringBuilder();
         chuoiJson.append("{\"danhsachsanpham\":[");
 
@@ -34,7 +34,8 @@ public class ThanhToanModel {
 
             chuoiJson.append("{");
             chuoiJson.append("\"masp\":"+hoaDon.getListChiTiet().get(i).getMaSp()+",");
-            chuoiJson.append("\"soluong\":"+hoaDon.getListChiTiet().get(i).getSoLuong());
+            chuoiJson.append("\"soluong\":"+hoaDon.getListChiTiet().get(i).getSoLuong()+",");
+            chuoiJson.append("\"giamgia\":"+hoaDon.getListChiTiet().get(i).getGiamGia());
             if (i==hoaDon.getListChiTiet().size()-1){
                 chuoiJson.append("}");
             } else {

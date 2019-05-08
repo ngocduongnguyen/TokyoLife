@@ -71,6 +71,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     Menu menu;
     boolean onpause = false;
 
+    int masp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +102,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         presenterLogicOptionMenuFB = new PresenterLogicOptionMenuFB();
 
         Intent intent = getIntent();
-        final int masp = intent.getIntExtra("masp",0);
+        masp  = intent.getIntExtra("masp",0);
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         presenterLogicChiTietSanPham.layChiTietSanPham(masp);
         presenterLogicChiTietSanPham.laydsDanhGiaTheoSP(masp,0);
@@ -179,47 +181,23 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         txtTenSanPham.setText(sanPhamGioHang.getTensp());
 
         int giaGoc = sanPhamGioHang.getGia();
-        if (sanPhamGioHang.getChiTietKhuyenMai()!=null){
-            int phantramkm = sanPhamGioHang.getChiTietKhuyenMai().getPhanTramKhuyenMai();
-            if (phantramkm!=0){
+        if (sanPhamGioHang.getGiamgia()>0){
+            int phantramkm = sanPhamGioHang.getGiamgia();
                 int giakm = 0;
-                giakm = giaGoc*phantramkm/100;
+                giakm = giaGoc-giaGoc*phantramkm/100;
                 NumberFormat numberFormat = new DecimalFormat("###,###");
                 String giaSP = numberFormat.format(giakm);
                 txtGiaTien.setText(giaSP+" VNĐ");
-
                 String giaSPkm = numberFormat.format(giaGoc);
                 txtGiamGia.setVisibility(View.VISIBLE);
                 txtGiamGia.setText(giaSPkm+" VNĐ");
                 txtGiamGia.setPaintFlags(txtGiamGia.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-            }
         } else {
             NumberFormat numberFormat = new DecimalFormat("###,###");
             String giaSP = numberFormat.format(giaGoc);
             txtGiaTien.setText(giaSP+" VNĐ");
         }
         txtThongtinChiTiet.setText(Html.fromHtml(sanPham.getThongtin()));
-
-//        //tạo thông số kỹ thuật
-//        List<ChiTietSanPham> dsCT = sanPhamGioHang.getDsChiTietSP();
-//        for (int i=0;i<dsCT.size();i++){
-//            LinearLayout linearLayout = new LinearLayout(this);
-//            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-//
-//            TextView txtTenThongSo = new TextView(this);
-//            txtTenThongSo.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
-//            txtTenThongSo.setText(dsCT.get(i).getChiTietSP());
-//            txtTenThongSo.setPadding(20,0,0,0);
-//
-//            TextView txtGiaTri = new TextView(this);
-//            txtGiaTri.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1.0f));
-//            txtGiaTri.setText(dsCT.get(i).getGiaTri());
-//
-//            linearLayout.addView(txtTenThongSo);
-//            linearLayout.addView(txtGiaTri);
-//
-//            layoutThongSoKT.addView(linearLayout);
 //        }
     }
 
@@ -338,11 +316,19 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
                 }
             });
         }
+
+        presenterLogicChiTietSanPham.laydsDanhGiaTheoSP(masp,0);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         onpause = true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenterLogicChiTietSanPham.laydsDanhGiaTheoSP(masp,0);
     }
 }

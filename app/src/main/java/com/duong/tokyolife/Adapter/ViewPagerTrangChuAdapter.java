@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.duong.tokyolife.View.TrangChu.Fragment.FragmentCTKM;
 import com.duong.tokyolife.View.TrangChu.Fragment.FragmentNoiBat;
+import com.duong.tokyolife.View.TrangChu.Fragment.FragmentSanPhamMoi;
 import com.duong.tokyolife.View.TrangChu.Fragment.FragmentTinTuc;
 
 public class ViewPagerTrangChuAdapter extends FragmentPagerAdapter {
@@ -24,10 +25,14 @@ public class ViewPagerTrangChuAdapter extends FragmentPagerAdapter {
                 return fragmentNoiBat;
 
             case 1:
+                FragmentSanPhamMoi fragmentSanPhamMoi = new FragmentSanPhamMoi();
+                return fragmentSanPhamMoi;
+
+            case 2:
                 FragmentCTKM fragmentCTKM = new FragmentCTKM();
                 return fragmentCTKM;
 
-            case 2:
+            case 3:
                 FragmentTinTuc fragmentTinTuc = new FragmentTinTuc();
                 return fragmentTinTuc;
 
@@ -37,7 +42,7 @@ public class ViewPagerTrangChuAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     @Nullable
@@ -48,9 +53,12 @@ public class ViewPagerTrangChuAdapter extends FragmentPagerAdapter {
                 return "Nổi bật";
 
             case 1:
-                return "Chương trình khuyến mại";
+                return "Sản phẩm mới";
 
             case 2:
+                return "Chương trình khuyến mại";
+
+            case 3:
                 return "Tin tức";
 
             default:return null;

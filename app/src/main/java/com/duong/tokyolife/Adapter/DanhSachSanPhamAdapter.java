@@ -11,11 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.duong.tokyolife.Model.ObjectClass.SanPham;
 import com.duong.tokyolife.R;
-import com.duong.tokyolife.Utils.ServerName;
 import com.duong.tokyolife.View.ChiTietSanPham.ChiTietSanPhamActivity;
 import com.squareup.picasso.Picasso;
 
@@ -23,72 +21,76 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 
-public class DsSpTheoLoaiSPAdapter extends RecyclerView.Adapter<DsSpTheoLoaiSPAdapter.SPbyLoaiHolder> {
+public class DanhSachSanPhamAdapter extends RecyclerView.Adapter<DanhSachSanPhamAdapter.SanPhamViewHolder> {
 
     Context context;
-    List<SanPham> dsSanPham;
-    public DsSpTheoLoaiSPAdapter(Context context, List<SanPham> dsSanPham){
-        this.context = context;
-        this.dsSanPham=dsSanPham;
+    List<SanPham> dsSanPhamNoiBat;
+    public DanhSachSanPhamAdapter(Context context, List<SanPham> dsSanPhamNoiBat){
+        this.context=context;
+        this.dsSanPhamNoiBat=dsSanPhamNoiBat;
     }
 
-    public class SPbyLoaiHolder extends RecyclerView.ViewHolder {
-
+    public class SanPhamViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView txtTen,txtGia,txtGiamGia;
         CardView cardView;
-
-        public SPbyLoaiHolder(@NonNull View itemView) {
+        public SanPhamViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardView=itemView.findViewById(R.id.cardViewSanPham);
             imageView=itemView.findViewById(R.id.img_item_sanpham);
             txtTen=itemView.findViewById(R.id.txt_tenSanPham);
             txtGia=itemView.findViewById(R.id.txt_giaSanPham);
             txtGiamGia=itemView.findViewById(R.id.txt_giamGiaSp);
+            cardView = itemView.findViewById(R.id.cardViewSanPham);
         }
     }
 
     @NonNull
     @Override
-    public SPbyLoaiHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public SanPhamViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.custom_item_sanpham,viewGroup,false);
-        SPbyLoaiHolder sPbyLoaiHolder = new SPbyLoaiHolder(view);
-        return sPbyLoaiHolder;
+
+        SanPhamViewHolder sanPhamViewHolder = new SanPhamViewHolder(view);
+
+        return sanPhamViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SPbyLoaiHolder sPbyLoaiHolder, int i) {
-        final SanPham sanPham = dsSanPham.get(i);
-        sPbyLoaiHolder.txtTen.setText(sanPham.getTensp());
-        Picasso.with(context).load(sanPham.getAnhlon()).resizeDimen(R.dimen._80sdp,R.dimen._100sdp).into(sPbyLoaiHolder.imageView);
+    public void onBindViewHolder(@NonNull SanPhamViewHolder sanPhamViewHolder, int i) {
+
+        final SanPham sanPham = dsSanPhamNoiBat.get(i);
+
+        sanPhamViewHolder.txtTen.setText(sanPham.getTensp());
+        Picasso.with(context).load(sanPham.getAnhlon()).resizeDimen(R.dimen._140sdp,R.dimen._140sdp).into(sanPhamViewHolder.imageView);
+        //Định dạng tiền tệ
+//        NumberFormat numberFormat = new DecimalFormat("###,###");
+//        String giaSP = numberFormat.format(sanPham.getGia());
+//        sanPhamViewHolder.txtGia.setText(giaSP+" VNĐ");
+
 
         int giaGoc = sanPham.getGia();
-        if (sanPham.getChiTietKhuyenMai()!=null){
+        if (sanPham.getGiamgia()!=0){
             int giakm = 0;
-            int phantramkm = sanPham.getChiTietKhuyenMai().getPhanTramKhuyenMai();
-            giakm = giaGoc*phantramkm/100;
+            int phantramkm = sanPham.getGiamgia();
+            giakm = giaGoc-giaGoc*phantramkm/100;
             NumberFormat numberFormat = new DecimalFormat("###,###");
             String giaSP = numberFormat.format(giakm);
-            sPbyLoaiHolder.txtGia.setText(giaSP+" VNĐ");
+            sanPhamViewHolder.txtGia.setText(giaSP+" VNĐ");
 
             String giaSPkm = numberFormat.format(giaGoc);
-            sPbyLoaiHolder.txtGiamGia.setVisibility(View.VISIBLE);
-            sPbyLoaiHolder.txtGiamGia.setText(giaSPkm+" VNĐ");
-            sPbyLoaiHolder.txtGiamGia.setPaintFlags(sPbyLoaiHolder.txtGiamGia.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+            sanPhamViewHolder.txtGiamGia.setVisibility(View.VISIBLE);
+            sanPhamViewHolder.txtGiamGia.setText(giaSPkm+" VNĐ");
+            sanPhamViewHolder.txtGiamGia.setPaintFlags(sanPhamViewHolder.txtGiamGia.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
         } else {
             NumberFormat numberFormat = new DecimalFormat("###,###");
             String giaSP = numberFormat.format(giaGoc);
-            sPbyLoaiHolder.txtGia.setText(giaSP+" VNĐ");
+            sanPhamViewHolder.txtGia.setText(giaSP+" VNĐ");
         }
-        //Định dạng tiền tệ
 
-
-
-        sPbyLoaiHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        sanPhamViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(context,"Ma san pham: "+sanPham.getMasp(),Toast.LENGTH_SHORT).show();
                 Intent iChiTiet = new Intent(context, ChiTietSanPhamActivity.class);
                 iChiTiet.putExtra("masp",sanPham.getMasp());
                 context.startActivity(iChiTiet);
@@ -98,6 +100,7 @@ public class DsSpTheoLoaiSPAdapter extends RecyclerView.Adapter<DsSpTheoLoaiSPAd
 
     @Override
     public int getItemCount() {
-        return dsSanPham.size();
+        return dsSanPhamNoiBat.size();
     }
+
 }

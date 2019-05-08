@@ -56,13 +56,13 @@ public class NoiBatAdapter extends RecyclerView.Adapter<NoiBatAdapter.ViewHolder
 
         //Hien thi danh sach san pham
         List<SanPham> dsSanPham = noiBat.getListLoaiSpNoiBat();
-        SanPhamNoiBatAdapter sanPhamNoiBatAdapter = new SanPhamNoiBatAdapter(context,dsSanPham);
+        DanhSachSanPhamAdapter danhSachSanPhamAdapter = new DanhSachSanPhamAdapter(context,dsSanPham);
 
         //RecyclerView.LayoutManager layoutManagerSP = new GridLayoutManager(context,2,GridLayoutManager.HORIZONTAL,false);
         RecyclerView.LayoutManager layoutManagerSP =new LinearLayoutManager(context);
-        viewHolder.recyclerSanPham.setAdapter(sanPhamNoiBatAdapter);
+        viewHolder.recyclerSanPham.setAdapter(danhSachSanPhamAdapter);
         viewHolder.recyclerSanPham.setLayoutManager(layoutManagerSP);
-        sanPhamNoiBatAdapter.notifyDataSetChanged();
+        danhSachSanPhamAdapter.notifyDataSetChanged();
     }
 
     @Override

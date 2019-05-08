@@ -284,5 +284,9 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
                 startActivity(iGioHang);
             }
         });
+
+        ViewPagerTrangChuAdapter viewPagerTrangChuAdapter = new ViewPagerTrangChuAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(viewPagerTrangChuAdapter);
+        viewPagerTrangChuAdapter.notifyDataSetChanged();
     }
 }

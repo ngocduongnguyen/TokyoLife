@@ -38,13 +38,8 @@ public class HienThiSPTheoThuongHieuModel {
                 sanPham.setMasp(spObject.getInt("masp"));
                 sanPham.setTensp(spObject.getString("tensp"));
                 sanPham.setAnhlon(spObject.getString("hinhlon"));
-//                sanPham.setAnhnho(spObject.getString("anhnho"));
-//                sanPham.setThongtin(spObject.getString("thongtin"));
                 sanPham.setGia(spObject.getInt("gia"));
-//                sanPham.setSoluong(spObject.getInt("soluong"));
-//                sanPham.setMaloaisp(spObject.getInt("maloaisp"));
-//                sanPham.setMath(spObject.getInt("math"));
-//                sanPham.setLuotmua(spObject.getInt("luotmua"));
+                sanPham.setGiamgia(spObject.getInt("giamgia"));
                 dsSP.add(sanPham);
             }
         } catch (ExecutionException e) {
