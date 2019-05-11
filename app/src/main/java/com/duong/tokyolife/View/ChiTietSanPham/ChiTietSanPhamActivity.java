@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -66,6 +67,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     RatingBar ratingBar;
     ImageView imgThemGioHang;
     Button btnMuaNgay;
+    ImageButton btnHome;
 
     SanPham sanPhamGioHang;
     Menu menu;
@@ -83,6 +85,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         txtTenSanPham = findViewById(R.id.txt_tenSanPham);
         txtGiaTien = findViewById(R.id.txt_giaSanPham);
         ratingBar=findViewById(R.id.rbDanhGia);
+        btnHome = findViewById(R.id.btnHome);
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
@@ -169,6 +172,13 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
                 Intent iThanhToan = new Intent(ChiTietSanPhamActivity.this,ThanhToanActivity.class);
                 startActivity(iThanhToan);
                 }
+            }
+        });
+
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -318,6 +328,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         }
 
         presenterLogicChiTietSanPham.laydsDanhGiaTheoSP(masp,0);
+        presenterLogicChiTietSanPham.layTBDanhGiaSP(masp);
     }
 
     @Override
