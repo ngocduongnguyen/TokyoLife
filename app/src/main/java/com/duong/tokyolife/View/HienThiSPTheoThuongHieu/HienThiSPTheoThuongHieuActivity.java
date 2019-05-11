@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.duong.tokyolife.Adapter.DanhSachSanPhamAdapter;
@@ -19,6 +21,7 @@ public class HienThiSPTheoThuongHieuActivity extends AppCompatActivity implement
     RecyclerView recyclerView;
     PresenterLogicHienThiSPTheoThuongHieu presenterLogicHienThiSPTheoThuongHieu;
     DanhSachSanPhamAdapter danhSachSanPhamAdapter;
+    ImageView iconBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,14 @@ public class HienThiSPTheoThuongHieuActivity extends AppCompatActivity implement
         recyclerView=findViewById(R.id.recyclerDsSpByThuongHieu);
         presenterLogicHienThiSPTheoThuongHieu = new PresenterLogicHienThiSPTheoThuongHieu(this);
         presenterLogicHienThiSPTheoThuongHieu.layDSspTheoThuogHieu(math);
+
+        iconBack = findViewById(R.id.btnHome);
+        iconBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
