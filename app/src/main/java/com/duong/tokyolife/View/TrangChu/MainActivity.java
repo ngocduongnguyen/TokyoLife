@@ -1,6 +1,9 @@
 package com.duong.tokyolife.View.TrangChu;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
@@ -10,6 +13,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +37,7 @@ import com.duong.tokyolife.View.ChiTietSanPham.ChiTietSanPhamActivity;
 import com.duong.tokyolife.View.DangNhap_DangKy.DangNhap_DangKyActivity;
 import com.duong.tokyolife.View.GioHang.GioHangActivity;
 import com.duong.tokyolife.View.HienThiSPTheoLoaiSP.HienThiSPTheoLoaiSPActivity;
+import com.duong.tokyolife.View.QLDonHang.QLDonHangActivity;
 import com.duong.tokyolife.View.TimKiem.TimKiemActivity;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
@@ -47,6 +53,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,6 +101,25 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         setContentView(R.layout.activity_main);
         addControls();
         addEvents();
+//        addKeyHash();
+    }
+
+    private void addKeyHash() {
+//        code lấy HashKey Facebook
+    try {
+        PackageInfo info = getBaseContext().getPackageManager().getPackageInfo(
+                "com.duong.tokyolife",
+                PackageManager.GET_SIGNATURES);
+        for (Signature signature : info.signatures) {
+            MessageDigest md = MessageDigest.getInstance("SHA");
+            md.update(signature.toByteArray());
+            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+        }
+    } catch (PackageManager.NameNotFoundException e) {
+
+    } catch (NoSuchAlgorithmException e) {
+
+    }
     }
 
     private void addControls() {
@@ -180,6 +207,8 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
                         Data.code=accessTokenFacebook.getUserId();
                         Data.name=tenNguoiDung;
                         menuItemDangNhap.setTitle(tenNguoiDung);
+                        //Theem acc
+                        dangNhapModel.themAccGG_FB(accessTokenFacebook.getUserId(),tenNguoiDung);
 //                    Log.d("tenNgDungFB",tenNguoiDung);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -196,6 +225,9 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
             Data.code=googleSignInResult.getSignInAccount().getId();
             Data.name=googleSignInResult.getSignInAccount().getDisplayName();
             menuItemDangNhap.setTitle(googleSignInResult.getSignInAccount().getDisplayName());
+
+            //Theem acc
+            dangNhapModel.themAccGG_FB(googleSignInResult.getSignInAccount().getId(),googleSignInResult.getSignInAccount().getDisplayName());
         }
         //database
         if (!cacheDatabase.equals("")){
@@ -256,6 +288,30 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
                 }
                 Data.code="";
                 Data.name="";
+                break;
+            case R.id.itDonhangcuatoi:
+                if (Data.code==""){
+                    Toast.makeText(MainActivity.this,"Bạn chưa đăng nhập!",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(MainActivity.this, QLDonHangActivity.class);
+                    intent.putExtra("idkhachhang",Data.code);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.itCaiDat:
+                    Toast.makeText(MainActivity.this,"Chức năng chưa hoàn thiện!",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.itChinhsach:
+                Toast.makeText(MainActivity.this,"Chức năng chưa hoàn thiện!",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.itFavorite:
+                Toast.makeText(MainActivity.this,"Chức năng chưa hoàn thiện!",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.itThongBao:
+                Toast.makeText(MainActivity.this,"Chức năng chưa hoàn thiện!",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.itTroGiup:
+                Toast.makeText(MainActivity.this,"Chức năng chưa hoàn thiện!",Toast.LENGTH_SHORT).show();
                 break;
         }
         return true;

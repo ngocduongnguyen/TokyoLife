@@ -9,13 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.duong.tokyolife.Model.ObjectClass.BaiViet;
-import com.duong.tokyolife.Model.ObjectClass.SanPham;
 import com.duong.tokyolife.R;
 import com.duong.tokyolife.View.ChiTietBaiViet.ChiTietBaiVietActivity;
 import com.squareup.picasso.Picasso;
@@ -48,7 +45,7 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.item_bai_viet,viewGroup,false);
+        View view = layoutInflater.inflate(R.layout.custom_item_bai_viet,viewGroup,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

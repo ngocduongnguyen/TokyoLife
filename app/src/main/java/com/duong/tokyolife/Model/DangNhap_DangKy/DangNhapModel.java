@@ -3,6 +3,7 @@ package com.duong.tokyolife.Model.DangNhap_DangKy;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.duong.tokyolife.Utils.Data;
 import com.duong.tokyolife.Utils.DownloadJSON;
@@ -19,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -133,5 +135,32 @@ public class DangNhapModel {
         SharedPreferences.Editor editor = cacheDangNhapDatabase.edit();
         editor.putString("tennv",tennv);
         editor.commit();
+    }
+
+    public void themAccGG_FB(String _id, String _name){
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+
+        HashMap<String,String> goiham = new HashMap<>();
+        goiham.put("goiham","themAccFB_GG");
+
+        HashMap<String,String> id = new HashMap<>();
+        id.put("id",_id);
+
+        HashMap<String,String> name = new HashMap<>();
+        name.put("name",_name);
+
+        Collections.addAll(attrs,goiham,id,name);
+
+        DownloadJSON downloadJSON = new DownloadJSON(ServerName.SERVER_NAME,attrs);
+        downloadJSON.execute();
+//
+//        try {
+//            String data = downloadJSON.get();
+//            Log.d("kiemtra", data);
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 }
