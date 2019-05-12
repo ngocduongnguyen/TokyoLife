@@ -98,14 +98,6 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageButton
-                    android:id="@+id/btnCod"
-                    android:background="@color/colorWhite"
-                    android:src="@drawable/ship"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_50sdp" />
                 <TextView
                     android:id="@+id/txtCod"
                     android:textAlignment="center"
@@ -119,14 +111,14 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageButton
-                    android:id="@+id/btnNoneCOD"
-                    android:background="@color/colorWhite"
-                    android:src="@drawable/visa"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_50sdp" />
+                <!--<ImageButton-->
+                    <!--android:id="@+id/"-->
+                    <!--android:background="@color/colorWhite"-->
+
+                    <!--android:layout_weight="1"-->
+                    <!--android:scaleType="centerInside"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="@dimen/_50sdp" />-->
                 <TextView
                     android:id="@+id/txtNoneCod"
                     android:textAlignment="center"

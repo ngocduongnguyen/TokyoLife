@@ -12,15 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Test.TaoDong"></activity>
         <activity android:name=".View.TaiKhoan.ThongTinTaiKhoanActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".View.QLDonHang.QLDonHangActivity">
-        </activity>
+        <activity android:name=".View.QLDonHang.QLDonHangActivity"></activity>
         <activity android:name=".View.ChiTietBaiViet.ChiTietBaiVietActivity" />
         <activity android:name=".View.TinTuc.BaiVietActivity" />
         <activity android:name=".View.TimKiem.TimKiemActivity" />
@@ -58,9 +60,9 @@
         <activity android:name=".View.FirstScreen.FirstScreen" />
         <activity android:name=".View.TrangChu.MainActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

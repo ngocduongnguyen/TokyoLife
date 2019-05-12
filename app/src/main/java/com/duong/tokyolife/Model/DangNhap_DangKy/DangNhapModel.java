@@ -153,14 +153,37 @@ public class DangNhapModel {
 
         DownloadJSON downloadJSON = new DownloadJSON(ServerName.SERVER_NAME,attrs);
         downloadJSON.execute();
-//
-//        try {
-//            String data = downloadJSON.get();
-//            Log.d("kiemtra", data);
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+    }
+
+    public String code(String _name){
+        String code = new String();
+
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+
+        HashMap<String,String> goiham = new HashMap<>();
+        goiham.put("goiham","layCode");
+
+        HashMap<String,String> name = new HashMap<>();
+        name.put("name",_name);
+
+        Collections.addAll(attrs,goiham,name);
+
+        DownloadJSON downloadJSON = new DownloadJSON(ServerName.SERVER_NAME,attrs);
+        downloadJSON.execute();
+
+        String dataJson = null;
+        try {
+            dataJson = downloadJSON.get();
+            JSONObject jsonObject = new JSONObject(dataJson);
+            code = jsonObject.getString("code");
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return code;
     }
 }

@@ -62,8 +62,8 @@ public class ThanhToanActivity extends AppCompatActivity implements IViewThanhTo
         btnThanhToan = findViewById(R.id.btnThanhToan);
         txtCod = findViewById(R.id.txtCod);
         txtNoneCod = findViewById(R.id.txtNoneCod);
-        btnCOD = findViewById(R.id.btnCod);
-        btnNoneCOD = findViewById(R.id.btnNoneCOD);
+//        btnCOD = findViewById(R.id.btnCod);
+//        btnNoneCOD = findViewById(R.id.btnNoneCOD);
         btnHome = findViewById(R.id.btnHome);
 
         chiTietHoaDons = new ArrayList<>();
@@ -124,21 +124,21 @@ public class ThanhToanActivity extends AppCompatActivity implements IViewThanhTo
             }
         });
 
-        btnCOD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickChuyenKhoan(txtCod,txtNoneCod);
-                chuyenkhoan = 0;
-            }
-        });
-
-        btnNoneCOD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickChuyenKhoan(txtNoneCod,txtCod);
-                chuyenkhoan = 1;
-            }
-        });
+//        btnCOD.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                clickChuyenKhoan(txtCod,txtNoneCod);
+//                chuyenkhoan = 0;
+//            }
+//        });
+//
+//        btnNoneCOD.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                clickChuyenKhoan(txtNoneCod,txtCod);
+//                chuyenkhoan = 1;
+//            }
+//        });
 
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override

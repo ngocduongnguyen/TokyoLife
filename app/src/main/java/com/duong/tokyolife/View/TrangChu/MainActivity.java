@@ -232,6 +232,8 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         }
         //database
         if (!cacheDatabase.equals("")){
+            Data.name = cacheDatabase;
+            Data.code = new DangNhapModel().code(cacheDatabase);
             menuItemDangNhap.setTitle(cacheDatabase);
         }
 
@@ -353,4 +355,39 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         menuLoaiSanPhamAdapter = new MenuLoaiSanPhamAdapter(this,R.layout.custom_item_loaisanpham_menu_left,listMenuTrai);
         listView.setAdapter(menuLoaiSanPhamAdapter);
     }
+
+//    void layDuLieuChung(){
+//        if (accessTokenFacebook!=null){
+//            GraphRequest graphRequest = GraphRequest.newMeRequest(accessTokenFacebook, new GraphRequest.GraphJSONObjectCallback() {
+//                @Override
+//                public void onCompleted(JSONObject object, GraphResponse response) {
+//                    try {
+//                        tenNguoiDung = object.getString("name");
+//                        Data.code=accessTokenFacebook.getUserId();
+//                        Data.name=tenNguoiDung;
+//                        menuItemDangNhap.setTitle(tenNguoiDung);
+//                        //Theem acc
+//                        dangNhapModel.themAccGG_FB(accessTokenFacebook.getUserId(),tenNguoiDung);
+////                    Log.d("tenNgDungFB",tenNguoiDung);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+//            Bundle bundle = new Bundle();
+//            bundle.putString("fields","name");
+//            graphRequest.setParameters(bundle);
+//            graphRequest.executeAsync();
+//        }
+//
+//        if (googleSignInResult!=null){
+//            Data.code=googleSignInResult.getSignInAccount().getId();
+//            Data.name=googleSignInResult.getSignInAccount().getDisplayName();
+//            menuItemDangNhap.setTitle(googleSignInResult.getSignInAccount().getDisplayName());
+//        }
+//        //database
+//        if (!cacheDatabase.equals("")){
+//            menuItemDangNhap.setTitle(cacheDatabase);
+//        }
+//    }
 }
