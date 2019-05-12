@@ -32,6 +32,7 @@ public class QLDonHangActivity extends AppCompatActivity implements IViewQLDH{
         setContentView(R.layout.activity_qldon_hang);
 
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         btnHome = findViewById(R.id.btnHome);

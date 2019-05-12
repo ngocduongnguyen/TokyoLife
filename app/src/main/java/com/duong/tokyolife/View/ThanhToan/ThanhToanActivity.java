@@ -39,6 +39,7 @@ public class ThanhToanActivity extends AppCompatActivity implements IViewThanhTo
     PresenterLogicThanhToan presenterLogicThanhToan;
     List<ChiTietHoaDon> chiTietHoaDons;
     TextView txtCod,txtNoneCod;
+    ImageView btnHome;
 
     int chuyenkhoan = 0;
 
@@ -63,6 +64,7 @@ public class ThanhToanActivity extends AppCompatActivity implements IViewThanhTo
         txtNoneCod = findViewById(R.id.txtNoneCod);
         btnCOD = findViewById(R.id.btnCod);
         btnNoneCOD = findViewById(R.id.btnNoneCOD);
+        btnHome = findViewById(R.id.btnHome);
 
         chiTietHoaDons = new ArrayList<>();
         presenterLogicThanhToan = new PresenterLogicThanhToan(this,getApplicationContext());
@@ -135,6 +137,14 @@ public class ThanhToanActivity extends AppCompatActivity implements IViewThanhTo
             public void onClick(View v) {
                 clickChuyenKhoan(txtNoneCod,txtCod);
                 chuyenkhoan = 1;
+            }
+        });
+
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThanhToanActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

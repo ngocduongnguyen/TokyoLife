@@ -10,11 +10,11 @@ public class PresenterLogicMenuLeftTrangChu implements IPresenterMenuLeftTrangCh
 
     public PresenterLogicMenuLeftTrangChu(IViewTrangChu iViewTrangChu){
         this.iViewTrangChu=iViewTrangChu;
-        dataJSONMenuLeft = new DataJSONMenuLeft();
     }
 
     @Override
     public void layDanhSachLoaiSP() {
+        dataJSONMenuLeft = new DataJSONMenuLeft();
         iViewTrangChu.hienThiDS_MenuLeft(dataJSONMenuLeft.layDanhSachLoaiSP());
     }
 }

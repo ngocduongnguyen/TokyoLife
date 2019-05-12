@@ -38,6 +38,7 @@ import com.duong.tokyolife.View.DangNhap_DangKy.DangNhap_DangKyActivity;
 import com.duong.tokyolife.View.GioHang.GioHangActivity;
 import com.duong.tokyolife.View.HienThiSPTheoLoaiSP.HienThiSPTheoLoaiSPActivity;
 import com.duong.tokyolife.View.QLDonHang.QLDonHangActivity;
+import com.duong.tokyolife.View.TaiKhoan.ThongTinTaiKhoanActivity;
 import com.duong.tokyolife.View.TimKiem.TimKiemActivity;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
@@ -299,7 +300,9 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
                 }
                 break;
             case R.id.itCaiDat:
-                    Toast.makeText(MainActivity.this,"Chức năng chưa hoàn thiện!",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, ThongTinTaiKhoanActivity.class);
+                    intent.putExtra("idkhachhang",Data.code);
+                    startActivity(intent);
                 break;
             case R.id.itChinhsach:
                 Toast.makeText(MainActivity.this,"Chức năng chưa hoàn thiện!",Toast.LENGTH_SHORT).show();
@@ -344,5 +347,10 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         ViewPagerTrangChuAdapter viewPagerTrangChuAdapter = new ViewPagerTrangChuAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerTrangChuAdapter);
         viewPagerTrangChuAdapter.notifyDataSetChanged();
+
+        presenterLogicMenuLeftTrangChu = new PresenterLogicMenuLeftTrangChu(this);
+        presenterLogicMenuLeftTrangChu.layDanhSachLoaiSP();
+        menuLoaiSanPhamAdapter = new MenuLoaiSanPhamAdapter(this,R.layout.custom_item_loaisanpham_menu_left,listMenuTrai);
+        listView.setAdapter(menuLoaiSanPhamAdapter);
     }
 }

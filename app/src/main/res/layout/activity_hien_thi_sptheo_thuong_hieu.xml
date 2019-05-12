@@ -18,6 +18,12 @@
             android:background="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/btnHome"
+                android:background="@color/colorWhite"
+                android:src="@drawable/baseline_home_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <LinearLayout
                 android:gravity="center"
                 android:layout_width="wrap_content"
@@ -31,13 +37,6 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/btnHome"
-                android:layout_marginLeft="@dimen/_70sdp"
-                android:background="@color/colorWhite"
-                android:src="@drawable/baseline_home_black_24dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

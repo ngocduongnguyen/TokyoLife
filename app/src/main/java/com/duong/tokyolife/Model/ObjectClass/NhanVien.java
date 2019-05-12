@@ -1,7 +1,7 @@
 package com.duong.tokyolife.Model.ObjectClass;
 
 public class NhanVien {
-    private int manv;
+    private long manv;
     private String tennv;
     private String tendn;
     private String diachi;
@@ -14,11 +14,11 @@ public class NhanVien {
     private String sendmail;
 
 
-    public int getManv() {
+    public long getManv() {
         return manv;
     }
 
-    public void setManv(int manv) {
+    public void setManv(long manv) {
         this.manv = manv;
     }
 
