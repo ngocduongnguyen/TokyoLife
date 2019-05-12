@@ -4,6 +4,7 @@ public class ChiTietDonHang {
     private String tensp;
     private int soluong;
     private int giamgia;
+    private int gia;
 
     public String getTensp() {
         return tensp;
@@ -27,5 +28,13 @@ public class ChiTietDonHang {
 
     public void setGiamgia(int giamgia) {
         this.giamgia = giamgia;
+    }
+
+    public int getGia() {
+        return gia;
+    }
+
+    public void setGia(int gia) {
+        this.gia = gia;
     }
 }

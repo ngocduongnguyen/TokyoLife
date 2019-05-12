@@ -55,6 +55,7 @@ public class QLDonHangModel {
                     chiTietDonHang.setTensp(chitietJSon.getJSONObject(j).getString("tensp"));
                     chiTietDonHang.setSoluong(chitietJSon.getJSONObject(j).getInt("soluong"));
                     chiTietDonHang.setGiamgia(chitietJSon.getJSONObject(j).getInt("giamgia"));
+                    chiTietDonHang.setGia(chitietJSon.getJSONObject(j).getInt("gia"));
                     lstChiTiet.add(chiTietDonHang);
                 }
                 donHang.setChiTietDonHang(lstChiTiet);
