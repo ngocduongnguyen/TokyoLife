@@ -108,24 +108,23 @@ public class ThongTinTaiKhoanActivity extends AppCompatActivity implements IView
         nv.setGioitinh(Integer.parseInt(gioitinh));
         nv.setCmnd(cmnd);
 
-        if (manv.equals("")|tennv.equals("")|ngaysinh.equals("")|diachi.equals("")|sodt.equals("")|gioitinh.equals("")|cmnd.equals("")|tendn.equals("")|matkhau.equals(""))
-            Toast.makeText(ThongTinTaiKhoanActivity.this,"Chưa đủ dữ liệu cập nhật!", Toast.LENGTH_SHORT).show();
-        else{
-            presenterLogicTaiKhoan.updateTaiKhoan(nv);
+        if (nhanVien.getTendn().equals("")&&nhanVien.getMatkhau().equals("")){
+            if (manv.equals("")|tennv.equals("")|ngaysinh.equals("")|diachi.equals("")|sodt.equals("")|gioitinh.equals("")|cmnd.equals(""))
+                Toast.makeText(ThongTinTaiKhoanActivity.this,"Chưa đủ dữ liệu cập nhật!", Toast.LENGTH_SHORT).show();
+            else{
+                presenterLogicTaiKhoan.updateTaiKhoan(nv);
+                Toast.makeText(ThongTinTaiKhoanActivity.this,"Cập nhật thành công!!", Toast.LENGTH_SHORT).show();
+                presenterLogicTaiKhoan.layThongTintaiKhoan(nv.getManv());
+            }
+        }else {
+            if (manv.equals("")|tennv.equals("")|ngaysinh.equals("")|diachi.equals("")|sodt.equals("")|gioitinh.equals("")|cmnd.equals(""))
+                Toast.makeText(ThongTinTaiKhoanActivity.this,"Chưa đủ dữ liệu cập nhật!", Toast.LENGTH_SHORT).show();
+            else{
+                presenterLogicTaiKhoan.updateTaiKhoan(nv);
+                Toast.makeText(ThongTinTaiKhoanActivity.this,"Cập nhật thành công!!", Toast.LENGTH_SHORT).show();
+                presenterLogicTaiKhoan.layThongTintaiKhoan(nv.getManv());
+            }
         }
-//        if (nhanVien.getTendn().equals("")&&nhanVien.getMatkhau().equals("")){
-//            if (manv.equals("")|tennv.equals("")|ngaysinh.equals("")|diachi.equals("")|sodt.equals("")|gioitinh.equals("")|cmnd.equals(""))
-//                Toast.makeText(ThongTinTaiKhoanActivity.this,"Chưa đủ dữ liệu cập nhật!", Toast.LENGTH_SHORT).show();
-//            else{
-//                Toast.makeText(ThongTinTaiKhoanActivity.this,"Cập nhật thành công!!", Toast.LENGTH_SHORT).show();
-//            }
-//        }else{
-//            if (manv.equals("")|tennv.equals("")|ngaysinh.equals("")|diachi.equals("")|sodt.equals("")|gioitinh.equals("")|cmnd.equals("")|tendn.equals("")|matkhau.equals(""))
-//                Toast.makeText(ThongTinTaiKhoanActivity.this,"Chưa đủ dữ liệu cập nhật!", Toast.LENGTH_SHORT).show();
-//            else{
-//                Toast.makeText(ThongTinTaiKhoanActivity.this,"Cập nhật thành công!!", Toast.LENGTH_SHORT).show();
-//            }
-//        }
     }
 
     @Override

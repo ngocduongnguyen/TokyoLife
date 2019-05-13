@@ -90,4 +90,23 @@ public class QLDonHangModel {
             e.printStackTrace();
         }
     }
+
+    public void daNhanDonHang(int madh){
+        List<HashMap<String,String>> attrs = new ArrayList<>();
+        HashMap<String,String> goiham = new HashMap<>();
+        goiham.put("goiham","daNhanDonHang");
+        HashMap<String,String> id = new HashMap<>();
+        id.put("id", String.valueOf(madh));
+        Collections.addAll(attrs,goiham,id);
+
+        DownloadJSON downloadJSON = new DownloadJSON(ServerName.SERVER_NAME,attrs);
+        downloadJSON.execute();
+        try {
+            String data = downloadJSON.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -34,12 +34,14 @@ import com.duong.tokyolife.Presenter.TrangChu.OptionMenuRight.PresenterLogicOpti
 import com.duong.tokyolife.R;
 import com.duong.tokyolife.Utils.Data;
 import com.duong.tokyolife.View.ChiTietSanPham.ChiTietSanPhamActivity;
+import com.duong.tokyolife.View.ChinhSach.ChinhSachActivity;
 import com.duong.tokyolife.View.DangNhap_DangKy.DangNhap_DangKyActivity;
 import com.duong.tokyolife.View.GioHang.GioHangActivity;
 import com.duong.tokyolife.View.HienThiSPTheoLoaiSP.HienThiSPTheoLoaiSPActivity;
 import com.duong.tokyolife.View.QLDonHang.QLDonHangActivity;
 import com.duong.tokyolife.View.TaiKhoan.ThongTinTaiKhoanActivity;
 import com.duong.tokyolife.View.TimKiem.TimKiemActivity;
+import com.duong.tokyolife.View.TroGiup.TroGiupActivity;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
@@ -106,21 +108,21 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
     }
 
     private void addKeyHash() {
-//        code lấy HashKey Facebook
-    try {
-        PackageInfo info = getBaseContext().getPackageManager().getPackageInfo(
-                "com.duong.tokyolife",
-                PackageManager.GET_SIGNATURES);
-        for (Signature signature : info.signatures) {
-            MessageDigest md = MessageDigest.getInstance("SHA");
-            md.update(signature.toByteArray());
-            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+    //        code lấy HashKey Facebook
+        try {
+            PackageInfo info = getBaseContext().getPackageManager().getPackageInfo(
+                    "com.duong.tokyolife",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
         }
-    } catch (PackageManager.NameNotFoundException e) {
-
-    } catch (NoSuchAlgorithmException e) {
-
-    }
     }
 
     private void addControls() {
@@ -307,7 +309,8 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
                     startActivity(intent);
                 break;
             case R.id.itChinhsach:
-                Toast.makeText(MainActivity.this,"Chức năng chưa hoàn thiện!",Toast.LENGTH_SHORT).show();
+                Intent iChinhSach = new Intent(MainActivity.this, ChinhSachActivity.class);
+                startActivity(iChinhSach);
                 break;
             case R.id.itFavorite:
                 Toast.makeText(MainActivity.this,"Chức năng chưa hoàn thiện!",Toast.LENGTH_SHORT).show();
@@ -316,7 +319,8 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
                 Toast.makeText(MainActivity.this,"Chức năng chưa hoàn thiện!",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.itTroGiup:
-                Toast.makeText(MainActivity.this,"Chức năng chưa hoàn thiện!",Toast.LENGTH_SHORT).show();
+                Intent iTroGiup = new Intent(MainActivity.this, TroGiupActivity.class);
+                startActivity(iTroGiup);
                 break;
         }
         return true;
@@ -355,39 +359,4 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu, Go
         menuLoaiSanPhamAdapter = new MenuLoaiSanPhamAdapter(this,R.layout.custom_item_loaisanpham_menu_left,listMenuTrai);
         listView.setAdapter(menuLoaiSanPhamAdapter);
     }
-
-//    void layDuLieuChung(){
-//        if (accessTokenFacebook!=null){
-//            GraphRequest graphRequest = GraphRequest.newMeRequest(accessTokenFacebook, new GraphRequest.GraphJSONObjectCallback() {
-//                @Override
-//                public void onCompleted(JSONObject object, GraphResponse response) {
-//                    try {
-//                        tenNguoiDung = object.getString("name");
-//                        Data.code=accessTokenFacebook.getUserId();
-//                        Data.name=tenNguoiDung;
-//                        menuItemDangNhap.setTitle(tenNguoiDung);
-//                        //Theem acc
-//                        dangNhapModel.themAccGG_FB(accessTokenFacebook.getUserId(),tenNguoiDung);
-////                    Log.d("tenNgDungFB",tenNguoiDung);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-//            Bundle bundle = new Bundle();
-//            bundle.putString("fields","name");
-//            graphRequest.setParameters(bundle);
-//            graphRequest.executeAsync();
-//        }
-//
-//        if (googleSignInResult!=null){
-//            Data.code=googleSignInResult.getSignInAccount().getId();
-//            Data.name=googleSignInResult.getSignInAccount().getDisplayName();
-//            menuItemDangNhap.setTitle(googleSignInResult.getSignInAccount().getDisplayName());
-//        }
-//        //database
-//        if (!cacheDatabase.equals("")){
-//            menuItemDangNhap.setTitle(cacheDatabase);
-//        }
-//    }
 }

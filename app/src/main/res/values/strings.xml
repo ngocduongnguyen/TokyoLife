@@ -4,4 +4,6 @@
     <string name="close">Đóng</string>
     <string name="facebook_app_id">427901707981347</string>
     <string name="fb_login_protocol_scheme">fb427901707981347</string>
+    <string name="troGiup">Trợ Giúp</string>
+    <string name="chinhSach">Chính Sách</string>
 </resources>

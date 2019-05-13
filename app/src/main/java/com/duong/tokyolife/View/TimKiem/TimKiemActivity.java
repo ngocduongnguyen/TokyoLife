@@ -44,6 +44,13 @@ public class TimKiemActivity extends AppCompatActivity implements IViewTimKiem, 
         MenuItem itSearch = menu.findItem(R.id.itTimKiem);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(itSearch);
         searchView.setIconified(false);
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                finish();
+                return true;
+            }
+        });
         searchView.setOnQueryTextListener(this);
         return true;
     }

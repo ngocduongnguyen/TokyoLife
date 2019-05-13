@@ -41,7 +41,7 @@ public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHang
 
         TextView mahd,trangthai,tennguoinhan,diachi,giatri,ngaymua,sodienthoai;
         LinearLayout lnThongSoKyThuat;
-        Button huyDon;
+        Button huyDon,danhan;
         int tongtien;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,6 +54,7 @@ public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHang
             sodienthoai = itemView.findViewById(R.id.sodt);
             huyDon = itemView.findViewById(R.id.huydonhang);
             lnThongSoKyThuat = itemView.findViewById(R.id.lnDanhSachSanPham);
+            danhan = itemView.findViewById(R.id.danhanhang);
             tongtien = 0;
         }
     }
@@ -71,6 +72,7 @@ public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHang
         final DonHang donhang = ds.get(i);
         viewHolder.mahd.setText("Mã hóa đơn: "+String.valueOf(donhang.getMaHD()));
         viewHolder.trangthai.setText("Trạng thái: "+donhang.getTrangthai());
+        viewHolder.trangthai.setTextColor(Color.BLUE);
         viewHolder.tennguoinhan.setText("Tên người nhận: "+donhang.getTennguoinhan());
         viewHolder.diachi.setText("Địa chỉ nhận: "+donhang.getDiachi());
         viewHolder.ngaymua.setText("Ngày mua: "+donhang.getNgayMua());
@@ -106,6 +108,7 @@ public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHang
 
             viewHolder.tongtien = viewHolder.tongtien + chiTietDonHang.get(j).getGia();
 
+            //Hủy đơn hàng
             if (donhang.getTrangthai().equals("Chờ kiểm duyệt")) {
                     viewHolder.huyDon.setVisibility(View.VISIBLE);
                     viewHolder.huyDon.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +139,38 @@ public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHang
                         }
              });
             }
+            //Button đã nhận hàng
+            if (donhang.getTrangthai().equals("Đang giao hàng")) {
+                viewHolder.danhan.setVisibility(View.VISIBLE);
+                viewHolder.danhan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Messenges");
+                        builder.setMessage("Bạn chắc chắn đã nhận hàng: "+String.valueOf(donhang.getMaHD()));
+                        builder.setCancelable(false);
+
+                        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                QLDonHangModel qlDonHangModel = new QLDonHangModel();
+                                qlDonHangModel.daNhanDonHang(donhang.getMaHD());
+                                Toast.makeText(context,"Đã xác nhận: "+String.valueOf(donhang.getMaHD()),Toast.LENGTH_SHORT).show();
+                                PresenterLogicQLDH presenterLogicQLDH = new PresenterLogicQLDH(iViewQLDH);
+                                presenterLogicQLDH.layDonHang(idkhachhang);
+                            }
+                        });
+                        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+                });
+            }
+
             viewHolder.giatri.setText("Tổng giá trị đơn hàng: "+viewHolder.tongtien+" VND");
         }
     }
